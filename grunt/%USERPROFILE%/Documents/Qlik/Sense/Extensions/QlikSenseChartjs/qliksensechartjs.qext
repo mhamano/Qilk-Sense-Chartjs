@@ -1,0 +1,9 @@
+{
+	"name" : "Qlik Sense Chartjs",
+	"description" : "",
+	"icon" : "bar-chart-vertical",
+	"type" : "visualization",
+	"version": "0.1",
+	"preview" : "bar",
+	"author": "Masaki Hamano"
+}
