@@ -55,7 +55,7 @@ define([
                   label: "Not On"
                 }],
                 defaultValue: false,
-                show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'}
+                show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5' || data.chart == '6'}
               },
               BackgroundColor: {
                 label:"Background Color",
@@ -78,7 +78,7 @@ define([
                   label: "100 Colors"
                 }],
                 defaultValue: "twelve",
-                show: function(data) { return data.chart == '2' || data.chart == '4' }
+                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6'}
               },
               SortByAlphabet: {
                 label:"Sort by Alphabetic Order on 2nd Dim",
@@ -93,7 +93,7 @@ define([
                   label: "Not On"
                 }],
                 defaultValue: false,
-                show: function(data) { return data.chart == '2' || data.chart == '4'}
+                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6'}
               },
               PointRadiusSize: {
       						type: "number",
@@ -104,7 +104,7 @@ define([
       						max: 20,
       						step: 1,
       						defaultValue: 1,
-                  show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'}
+                  show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'  || data.chart == '6'}
               },
               CumulativeSwitch: {
                 type: "boolean",

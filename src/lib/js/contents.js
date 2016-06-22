@@ -24,9 +24,9 @@ var chartjs = [
     measures:1
   },
   {
-    name:"Stacked Line Chart",
+    name:"Multi-Series Line Chart",
     id:4,
-    src:"stacked_line_chart.js",
+    src:"multi_series_line_chart.js",
     min_dims:2,
     max_dims:2,
     measures:1
@@ -39,14 +39,14 @@ var chartjs = [
     max_dims:1,
     measures:1
    },
-  // {
-  //   name:"Radar Multiple",
-  //   id:4,
-  //   src:"multiple_radar_chart.js",
-  //   min_dims:2,
-  //   max_dims:2,
-  //   measures:1
-  // },
+  {
+    name:"Radar Multiple",
+    id:6,
+    src:"multiple_radar_chart.js",
+    min_dims:2,
+    max_dims:2,
+    measures:1
+  },
 ];
 
 var chart_options = chartjs.map(function(d) {

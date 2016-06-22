@@ -112,8 +112,8 @@ if (layout.color_selection == 'twelve') {
   var datasets = [];
   for(var i=0; i<uniqDim2.length; i++ ) {
     var subdata = [];
-    //subdata.label = uniqDim2[i];
-    subdata.label = "test"
+    subdata.label = uniqDim2[i];
+    //subdata.label = "test"
     subdata.backgroundColor = palette[i];
     subdata.data = result[uniqDim2[i]];
     subdata.fill = layout.background_color_switch;

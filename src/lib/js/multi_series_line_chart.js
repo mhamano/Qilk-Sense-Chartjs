@@ -140,14 +140,14 @@ if (layout.color_selection == 'twelve') {
               mode: 'label'
           },
           responsive: true,
-          scales: {
-              xAxes: [{
-                  stacked: true,
-              }],
-              yAxes: [{
-                  stacked: true
-              }]
-          },
+          // scales: {
+          //     xAxes: [{
+          //         stacked: true,
+          //     }],
+          //     yAxes: [{
+          //         stacked: true
+          //     }]
+          // },
           events: ["mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend"],
           onClick: function(evt) {
               var activePoints = this.getElementsAtEvent(evt);
