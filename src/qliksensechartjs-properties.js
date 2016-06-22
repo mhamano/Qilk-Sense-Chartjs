@@ -25,35 +25,105 @@ define([
           ChartDropDown: {
             type: "string",
             component: "dropdown",
-            label: "Chart",
+            label: "Chart Selection",
             ref: "chart",
-            options: content_options,
+            options: chart_options,
             defaultValue: 1
           },
-          ColorPicker: {
-							label:"Color",
-							component: "color-picker",
-							ref: "color",
-							type: "integer",
-							defaultValue: 3
-					},
-          CumulativeSwitch: {
-          type: "boolean",
-          component: "switch",
-          label: "Cumulative",
-          ref: "cumulative",
-          options: [{
-            value: true,
-            label: "On"
-          }, {
-            value: false,
-            label: "Not On"
-          }],
-          defaultValue: false
+          ChartSettings: {
+          	type: "items",
+          	label: "Chart Settings",
+            items: {
+              ColorPicker: {
+                label:"Color",
+                component: "color-picker",
+                ref: "color",
+                type: "integer",
+                defaultValue: 3,
+                show: function(data) { return data.chart == '1' || data.chart == '3' || data.chart == '5'}
+              },
+              BackgroundColorSwitch: {
+                label: "Background Color",
+                component: "switch",
+                ref: "background_color_switch",
+                type: "boolean",
+                options: [{
+                  value: true,
+                  label: "On"
+                }, {
+                  value: false,
+                  label: "Not On"
+                }],
+                defaultValue: false,
+                show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'}
+              },
+              BackgroundColor: {
+                label:"Background Color",
+                component: "color-picker",
+                ref: "background_color",
+                type: "integer",
+                defaultValue: 3,
+                show: function(data) { return ( data.background_color_switch == true && data.chart == '3' ) || ( data.background_color_switch == true && data.chart == '5' )}
+              },
+              ColorSelection: {
+                type: "string",
+                component: "dropdown",
+                label: "Color Selection",
+                ref: "color_selection",
+                options: [{
+                  value: "twelve",
+                  label: "12 Colors"
+                }, {
+                  value: "one-handred",
+                  label: "100 Colors"
+                }],
+                defaultValue: "twelve",
+                show: function(data) { return data.chart == '2' || data.chart == '4' }
+              },
+              SortByAlphabet: {
+                label:"Sort by Alphabetic Order on 2nd Dim",
+                component: "switch",
+                ref: "sort",
+                type: "boolean",
+                options: [{
+                  value: true,
+                  label: "On"
+                }, {
+                  value: false,
+                  label: "Not On"
+                }],
+                defaultValue: false,
+                show: function(data) { return data.chart == '2' || data.chart == '4'}
+              },
+              PointRadiusSize: {
+      						type: "number",
+      						component: "slider",
+      						label: "Point Raduis Size",
+      						ref: "point_radius_size",
+      						min: 1,
+      						max: 20,
+      						step: 1,
+      						defaultValue: 1,
+                  show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'}
+              },
+              CumulativeSwitch: {
+                type: "boolean",
+                component: "switch",
+                label: "Cumulative Calculation",
+                ref: "cumulative",
+                options: [{
+                  value: true,
+                  label: "On"
+                }, {
+                  value: false,
+                  label: "Not On"
+                }],
+                defaultValue: false
+              }
+          }
         }
-        }
+      }
     };
-
 
     // Return values
     return {
