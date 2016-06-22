@@ -59,23 +59,23 @@ function ($, _, props, initProps, extensionUtils, cssContent, contents, Chart) {
     				var dim_count = layout.qHyperCube.qDimensionInfo.length;
     				var measure_count = layout.qHyperCube.qMeasureInfo.length;
 
-    				if ((dim_count < charts.filter(function(d) {
+    				if ((dim_count < chartjs.filter(function(d) {
     						return d.id === layout.chart
-    					})[0].min_dims || dim_count > charts.filter(function(d) {
+    					})[0].min_dims || dim_count > chartjs.filter(function(d) {
     						return d.id === layout.chart
-    					})[0].max_dims) || measure_count < charts.filter(function(d) {
+    					})[0].max_dims) || measure_count < chartjs.filter(function(d) {
     						return d.id === layout.chart
     					})[0].measures) {
-    					$element.html("This chart requires " + charts.filter(function(d) {
+    					$element.html("This chart requires " + chartjs.filter(function(d) {
     						return d.id === layout.chart
-    					})[0].min_dims + " dimensions and " + charts.filter(function(d) {
+    					})[0].min_dims + " dimensions and " + chartjs.filter(function(d) {
     						return d.id === layout.chart
     					})[0].measures + " measures.");
     				} else {
 
               //if (layout.chart != lastUsedChart) {
     						// Determine URL based on chart selection
-    						var src = charts.filter(function(d) {
+    						var src = chartjs.filter(function(d) {
     							return d.id === layout.chart
     						})[0].src;
 

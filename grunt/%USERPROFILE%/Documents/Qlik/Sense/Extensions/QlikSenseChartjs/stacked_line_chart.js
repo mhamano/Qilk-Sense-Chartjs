@@ -115,6 +115,10 @@ if (layout.color_selection == 'twelve') {
     subdata.label = uniqDim2[i];
     subdata.backgroundColor = palette[i];
     subdata.data = result[uniqDim2[i]];
+    subdata.fill = layout.background_color_switch;
+    subdata.borderColor = palette[i];
+    subdata.pointBackgroundColor = "#FFFFFF";
+    subdata.pointRadius = layout.point_radius_size;
     datasets.push(subdata);
   }
 
@@ -125,7 +129,7 @@ if (layout.color_selection == 'twelve') {
 
   var ctx = document.getElementById(id);
   var myStackedBar = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: barChartData,
       options: {
           title:{
