@@ -1,5 +1,12 @@
-var viz = function($element, layout, _this) {
-  var id = senseUtils.setupContainer($element,layout,"chartjs_bar");
+var visualize = function($element, layout, _this) {
+  var id  = layout.qInfo.qId + "_chartjs_stacked_bar";
+  var ext_width = $element.width(), ext_height = $element.height();
+  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+      width = ext_width - margin.left - margin.right,
+      height = ext_height - margin.top - margin.bottom;
+
+  //$element.empty();
+  $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
 
   var palette = [
 			"#4477aa",
@@ -51,8 +58,6 @@ var viz = function($element, layout, _this) {
     i++;
   });
 
-  console.log(result["dim1_elem"])
-
   // Culculate cumulative sum when cumulative switch is on
   var cumSum = 0;
   if (layout.cumulative) {
@@ -60,8 +65,12 @@ var viz = function($element, layout, _this) {
     for(var i=0; i<uniqDim2.length; i++) {
       // Acumulate values
       for(var j=0; j<result[uniqDim2[i]].length; j++) {
-        isNaN(result[uniqDim2[i]][j]) ? cumSum += 0 : cumSum += result[uniqDim2[i]][j];
-        result[uniqDim2[i]][j] = cumSum;
+        if ( result["dim1_elem"][j] < 0 ) {
+          //ignore dimension with "-" value
+        } else {
+          isNaN(result[uniqDim2[i]][j]) ? cumSum += 0 : cumSum += result[uniqDim2[i]][j];
+          result[uniqDim2[i]][j] = cumSum;
+        }
       }
       cumSum = 0;  //reset variable for sum
     }
@@ -76,13 +85,13 @@ var viz = function($element, layout, _this) {
     subdata.data = result[uniqDim2[i]];
     datasets.push(subdata);
   }
-  var ctx = document.getElementById("myChart");
 
   var barChartData = {
       labels: result["dim1"],
       datasets: datasets
   };
-  var ctx = document.getElementById("myChart");
+
+  var ctx = document.getElementById(id);
   var myBar = new Chart(ctx, {
       type: 'bar',
       data: barChartData,
@@ -109,8 +118,12 @@ var viz = function($element, layout, _this) {
               if(activePoints.length > 0) {
                 var values = [];
                 var dim = 0;
-                values.push(result["dim1_elem"][activePoints[0]._index]);
-                _this.selectValues(dim, values, true)
+                if(result["dim1_elem"][activePoints[0]._index]<0) {
+                  //do nothing
+                } else {
+                  values.push(result["dim1_elem"][activePoints[0]._index]);
+                  _this.selectValues(dim, values, true)
+                }
               }
           }
       }

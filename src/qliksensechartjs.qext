@@ -3,7 +3,7 @@
 	"description" : "",
 	"icon" : "bar-chart-vertical",
 	"type" : "visualization",
-	"version": "0.1",
+	"version": "0.2",
 	"preview" : "bar",
 	"author": "Masaki Hamano"
 }

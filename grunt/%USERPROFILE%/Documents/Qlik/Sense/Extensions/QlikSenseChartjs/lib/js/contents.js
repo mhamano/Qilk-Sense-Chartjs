@@ -9,7 +9,7 @@ var charts = [
   },
   {
     name:"Stacked Bar Chart",
-    id:3,
+    id:2,
     src:"stacked_bar_chart.js",
     min_dims:2,
     max_dims:2,
