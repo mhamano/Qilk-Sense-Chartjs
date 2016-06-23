@@ -55,6 +55,14 @@ var chartjs = [
     max_dims:1,
     measures:1
    },
+   {
+     name:"Pie and Doughnut Charts",
+     id:8,
+     src:"pie_and_doughnut_charts.js",
+     min_dims:1,
+     max_dims:1,
+     measures:1
+    },
 ];
 
 var chart_options = chartjs.map(function(d) {
