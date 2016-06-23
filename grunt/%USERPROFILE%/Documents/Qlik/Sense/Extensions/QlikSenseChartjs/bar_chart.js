@@ -56,6 +56,11 @@ var visualize = function($element, layout, _this) {
             display:true,
             text:layout.title
         },
+        legend: {
+          onClick:function(evt, legendItem) {
+            //do nothing
+          }
+        },
         responsive: true,
         events: ["mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend"],
         onClick: function(evt) {

@@ -58,6 +58,18 @@ var visualize = function($element, layout, _this) {
             display:true,
             text:layout.title
         },
+        legend: {
+          onClick:function(evt, legendItem) {
+            var values = [];
+            var dim = 0;
+            if(data[legendItem.index][0].qElemNumber<0) {
+              //do nothing
+            } else {
+              values.push(data[legendItem.index][0].qElemNumber);
+              _this.selectValues(dim, values, true);
+            }
+          }
+        },
         responsive: true,
         events: ["mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend"],
         onClick: function(evt) {

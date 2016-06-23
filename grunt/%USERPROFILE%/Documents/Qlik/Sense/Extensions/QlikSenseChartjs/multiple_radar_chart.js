@@ -38,10 +38,13 @@ if (layout.color_selection == 'twelve') {
 }
 
   var qMatrix = layout.qHyperCube.qDataPages[0].qMatrix;
-  var uniqDim2 = [];
+  var uniqDim2 = [], uniqDim2ElemNum = [];
 
   var data = qMatrix.map(function(d) {
-    if(uniqDim2.indexOf(d[1].qText) < 0){uniqDim2.push(d[1].qText)}
+    if(uniqDim2.indexOf(d[1].qText) < 0){
+      uniqDim2.push(d[1].qText);
+      uniqDim2ElemNum[d[1].qText] = d[1].qElemNumber ;
+    }
     return({
       dim1: d[0].qText,
       dim1_elem: d[0].qElemNumber,
@@ -136,6 +139,18 @@ if (layout.color_selection == 'twelve') {
           title:{
               display:true,
               text:layout.title
+          },
+          legend: {
+            onClick:function(evt, legendItem) {
+              var values = [];
+              var dim = 1;
+              if(uniqDim2ElemNum[legendItem.text]<0) {
+                //do nothing
+              } else {
+                values.push(uniqDim2ElemNum[legendItem.text]);
+                _this.selectValues(dim, values, true);
+              }
+            }
           },
           tooltips: {
               mode: 'label'
