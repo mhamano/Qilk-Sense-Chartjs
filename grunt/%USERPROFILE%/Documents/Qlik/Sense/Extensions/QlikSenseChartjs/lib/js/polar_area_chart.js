@@ -36,8 +36,6 @@ var visualize = function($element, layout, _this) {
     return "rgba(" + d + "," + layout.opacity + ")";
   });
 
-  console.log(palette_r)
-
   var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
   if (layout.cumulative) {
