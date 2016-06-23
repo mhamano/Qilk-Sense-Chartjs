@@ -34,6 +34,21 @@ define([
           	type: "items",
           	label: "Chart Settings",
             items: {
+              ShowAsDoughnutChart: {
+                label: "Show As Doughnut Chart",
+                component: "switch",
+                ref: "pie_doughnut",
+                type: "string",
+                options: [{
+                  value: "doughnut",
+                  label: "ON"
+                }, {
+                  value: "pie",
+                  label: "OFF"
+                }],
+                defaultValue: "pie",
+                show: function(data) { return data.chart == '8'}
+              },
               ColorPicker: {
                 label:"Color",
                 component: "color-picker",

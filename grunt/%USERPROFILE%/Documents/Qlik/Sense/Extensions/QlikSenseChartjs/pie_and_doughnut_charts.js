@@ -53,7 +53,7 @@ var visualize = function($element, layout, _this) {
   var ctx = document.getElementById(id);
 
   var myRadarChart = new Chart(ctx, {
-      type: 'pie',
+      type: layout.pie_doughnut,
       data: {
           labels: data.map(function(d) { return d[0].qText; }),
           datasets: [{
