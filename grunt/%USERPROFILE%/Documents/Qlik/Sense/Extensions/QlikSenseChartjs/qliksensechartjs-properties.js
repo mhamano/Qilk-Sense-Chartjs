@@ -78,7 +78,7 @@ define([
                   label: "100 Colors"
                 }],
                 defaultValue: "twelve",
-                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6' || data.chart == '7'}
+                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6' || data.chart == '7' || data.chart == '8'}
               },
               SortByAlphabet: {
                 label:"Sort by Alphabetic Order on 2nd Dim",
@@ -93,7 +93,7 @@ define([
                   label: "OFF"
                 }],
                 defaultValue: false,
-                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6' || data.chart == '7'}
+                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6' || data.chart == '7' || data.chart == '8'}
               },
               PointRadiusSize: {
       						type: "number",

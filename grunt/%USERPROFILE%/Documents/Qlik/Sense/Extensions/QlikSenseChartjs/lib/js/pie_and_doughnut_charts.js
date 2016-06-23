@@ -55,8 +55,8 @@ var visualize = function($element, layout, _this) {
       },
       options: {
         title:{
-            display:true,
-            text:layout.title
+            display: layout.title_switch,
+            text: layout.title
         },
         legend: {
           onClick:function(evt, legendItem) {
