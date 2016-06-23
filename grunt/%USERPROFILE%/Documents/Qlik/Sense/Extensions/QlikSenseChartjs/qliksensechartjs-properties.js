@@ -43,7 +43,7 @@ define([
                 show: function(data) { return data.chart == '1' || data.chart == '3' || data.chart == '5'}
               },
               BackgroundColorSwitch: {
-                label: "Background Color",
+                label: "Fill Background Color",
                 component: "switch",
                 ref: "background_color_switch",
                 type: "boolean",
@@ -79,6 +79,17 @@ define([
                 }],
                 defaultValue: "twelve",
                 show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6' || data.chart == '7' || data.chart == '8'}
+              },
+              ColorOpacity: {
+                  type: "number",
+                  component: "slider",
+                  label: "Color Opacity",
+                  ref: "opacity",
+                  min: 0,
+                  max: 1,
+                  step: 0.1,
+                  defaultValue: 0.5,
+                  show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'  || data.chart == '6'}
               },
               SortByAlphabet: {
                 label:"Sort by Alphabetic Order on 2nd Dim",

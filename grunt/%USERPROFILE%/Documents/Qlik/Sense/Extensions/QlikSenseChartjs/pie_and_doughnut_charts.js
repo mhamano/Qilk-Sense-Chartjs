@@ -49,8 +49,7 @@ var visualize = function($element, layout, _this) {
               backgroundColor: palette,
               borderColor: palette,
               pointBackgroundColor: palette,
-              borderWidth: 1,
-              pointRadius: layout.point_radius_size
+              borderWidth: 1
           }]
       },
       options: {

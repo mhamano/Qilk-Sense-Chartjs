@@ -50,8 +50,7 @@ var visualize = function($element, layout, _this) {
               backgroundColor: (layout.background_color_switch) ? palette[layout.background_color] : palette[layout.color],
               borderColor: palette[layout.color],
               pointBackgroundColor: palette[layout.color],
-              borderWidth: 1,
-              pointRadius: layout.point_radius_size
+              borderWidth: 1
           }]
       },
       options: {
