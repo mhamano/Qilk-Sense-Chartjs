@@ -24,7 +24,7 @@ function ($, _, props, initProps, extensionUtils, cssContent, contents, Chart) {
 
     //Accessing requirejs semi-private API - This might break in future versions of require.
     var base = requirejs.s.contexts._.config.baseUrl + requirejs.s.contexts._.config.paths.extensions
-    var lastUsedChart = -1;
+    //var lastUsedChart = -1;
 
     return {
         definition: props,
@@ -84,7 +84,7 @@ function ($, _, props, initProps, extensionUtils, cssContent, contents, Chart) {
     						// Load in the appropriate script and viz
     						jQuery.getScript(url, function() {
     							visualize($element, layout, self);
-    							lastUsedChart = layout.chart;
+    							//lastUsedChart = layout.chart;
     						});
     					//} else {
     					//	viz($element, layout, self);

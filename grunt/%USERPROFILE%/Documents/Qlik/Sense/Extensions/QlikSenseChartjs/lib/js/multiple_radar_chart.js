@@ -55,16 +55,8 @@ if (layout.color_selection == 'twelve') {
 
   // Sort by Alphabetic order
   if (layout.sort) {
-    uniqDim2.sort(function(a, b){
-     var nameA=a[0].toLowerCase(), nameB=b[0].toLowerCase();
-     if (nameA < nameB) //sort string ascending
-      return -1;
-     if (nameA > nameB)
-      return 1;
-     return 0; //default return value (no sorting)
-    });
+    uniqDim2.sort()
   }
-
   //Group by dimension1
   var dataGroupedBy = _.groupBy(data, 'dim1')
 
