@@ -2,7 +2,6 @@
 
 ## Purpose and Description
 Qlik Sense Extension using Chart.js(http://www.chartjs.org/).
-(Initial release includes Bar Chart and Stacked bar chart with/without accumulation.)
 
 ## Screenshots
 ![Alt text](./src/lib/images/extension_sample1.png)
