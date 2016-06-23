@@ -1,7 +1,7 @@
 var visualize = function($element, layout, _this) {
   var id  = layout.qInfo.qId + "_chartjs_stacked_bar";
   var ext_width = $element.width(), ext_height = $element.height();
-  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+  var margin = {top: 20, right: 20, bottom: 50, left: 40},
       width = ext_width - margin.left - margin.right,
       height = ext_height - margin.top - margin.bottom;
 
