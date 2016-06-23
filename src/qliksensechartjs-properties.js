@@ -88,8 +88,7 @@ define([
                   min: 0,
                   max: 1,
                   step: 0.1,
-                  defaultValue: 0.8,
-                  show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'  || data.chart == '6'}
+                  defaultValue: 0.8
               },
               SortByAlphabet: {
                 label:"Sort by Alphabetic Order on 2nd Dim",
@@ -114,7 +113,7 @@ define([
       						min: 1,
       						max: 20,
       						step: 1,
-      						defaultValue: 1,
+      						defaultValue: 2,
                   show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'  || data.chart == '6'}
               },
               CumulativeSwitch: {

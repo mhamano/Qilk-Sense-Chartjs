@@ -8,20 +8,9 @@ var visualize = function($element, layout, _this) {
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
 
-  var palette = [
-			"#b0afae",
-			"#7b7a78",
-			"#545352",
-			"#4477aa",
-			"#7db8da",
-			"#b6d7ea",
-			"#46c646",
-			"#f93f17",
-			"#ffcf02",
-			"#276e27",
-			"#ffffff",
-			"#000000"
-	];
+  // Qlik Sense default palette colors
+  //var palette = [ "#b0afae", "#7b7a78", "#545352", "#4477aa", "#7db8da", "#b6d7ea", "#46c646", "#f93f17", "#ffcf02", "#276e27", "#ffffff", "#000000" ];
+  var palette = [ "176,175,174", "123,122,120", "84,83,82", "68,119,170", "125,184,218", "182,215,234", "70,198,70", "249,63,23", "255,207,2", "39,110,39", "255,255,255", "0,0,0" ];
 
   var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
@@ -47,9 +36,9 @@ var visualize = function($element, layout, _this) {
               label: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle,
               fill: layout.background_color_switch,
               data: data.map(function(d) { return d[1].qNum; }),
-              backgroundColor: (layout.background_color_switch) ? palette[layout.background_color] : palette[layout.color],
-              borderColor: palette[layout.color],
-              pointBackgroundColor: palette[layout.color],
+              backgroundColor: (layout.background_color_switch) ?  "rgba(" + palette[layout.background_color] + "," + layout.opacity + ")" : "rgba(" + palette[layout.color] + "," + layout.opacity + ")",
+              borderColor: "rgba(" + palette[layout.color] + "," + layout.opacity + ")",
+              pointBackgroundColor: "rgba(" + palette[layout.color] + "," + layout.opacity + ")",
               borderWidth: 1
           }]
       },
