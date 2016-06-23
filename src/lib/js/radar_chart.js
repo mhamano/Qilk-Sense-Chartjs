@@ -39,6 +39,7 @@ var visualize = function($element, layout, _this) {
               backgroundColor: (layout.background_color_switch) ?  "rgba(" + palette[layout.background_color] + "," + layout.opacity + ")" : "rgba(" + palette[layout.color] + "," + layout.opacity + ")",
               borderColor: "rgba(" + palette[layout.color] + "," + layout.opacity + ")",
               pointBackgroundColor: "rgba(" + palette[layout.color] + "," + layout.opacity + ")",
+              pointRadius: layout.point_radius_size,
               borderWidth: 1
           }]
       },

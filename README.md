@@ -1,9 +1,11 @@
-# Qlik Sense Chartjs
+# Qlik Sense Chart.js
 
 ## Purpose and Description
 Qlik Sense Extension using Chart.js(http://www.chartjs.org/).
 
 ## Screenshots
+![Alt text](./src/lib/images/extension_sample0.png)
+
 ![Alt text](./src/lib/images/extension_sample1.png)
 
 ![Alt text](./src/lib/images/extension_sample2.png)
