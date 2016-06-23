@@ -49,10 +49,10 @@ define([
                 type: "boolean",
                 options: [{
                   value: true,
-                  label: "On"
+                  label: "ON"
                 }, {
                   value: false,
-                  label: "Not On"
+                  label: "OFF"
                 }],
                 defaultValue: false,
                 show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5' || data.chart == '6'}
@@ -87,10 +87,10 @@ define([
                 type: "boolean",
                 options: [{
                   value: true,
-                  label: "On"
+                  label: "ON"
                 }, {
                   value: false,
-                  label: "Not On"
+                  label: "OFF"
                 }],
                 defaultValue: false,
                 show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6' || data.chart == '7'}
@@ -113,10 +113,24 @@ define([
                 ref: "cumulative",
                 options: [{
                   value: true,
-                  label: "On"
+                  label: "ON"
                 }, {
                   value: false,
-                  label: "Not On"
+                  label: "OFF"
+                }],
+                defaultValue: false
+              },
+              TitleSwitch: {
+                type: "boolean",
+                component: "switch",
+                label: "Show Title",
+                ref: "title_switch",
+                options: [{
+                  value: true,
+                  label: "ON"
+                }, {
+                  value: false,
+                  label: "OFF"
                 }],
                 defaultValue: false
               }

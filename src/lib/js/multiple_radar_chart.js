@@ -137,11 +137,11 @@ if (layout.color_selection == 'twelve') {
       data: barChartData,
       options: {
           title:{
-              display:true,
-              text:layout.title
+              display: layout.title_switch,
+              text: layout.title
           },
           legend: {
-            onClick:function(evt, legendItem) {
+            onClick: function(evt, legendItem) {
               var values = [];
               var dim = 1;
               if(uniqDim2ElemNum[legendItem.text]<0) {

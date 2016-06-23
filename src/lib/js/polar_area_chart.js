@@ -55,11 +55,11 @@ var visualize = function($element, layout, _this) {
       },
       options: {
         title:{
-            display:true,
-            text:layout.title
+            display: layout.title_switch,
+            text: layout.title
         },
         legend: {
-          onClick:function(evt, legendItem) {
+          onClick: function(evt, legendItem) {
             var values = [];
             var dim = 0;
             if(data[legendItem.index][0].qElemNumber<0) {
