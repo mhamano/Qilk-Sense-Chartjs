@@ -130,6 +130,45 @@ define([
                 }],
                 defaultValue: false
               },
+              CumulativeLine: {
+                type: "boolean",
+                component: "switch",
+                label: "Show Cumulative Line",
+                ref: "cumulative_line",
+                options: [{
+                  value: true,
+                  label: "ON"
+                }, {
+                  value: false,
+                  label: "OFF"
+                }],
+                defaultValue: false,
+                show: false
+              },
+              LegendPotision: {
+                type: "string",
+                component: "dropdown",
+                label: "Legend Position",
+                ref: "legend_position",
+                options: [{
+                  value: "top",
+                  label: "Top"
+                }, {
+                  value: "bottom",
+                  label: "Bottom"
+                },{
+                  value: "right",
+                  label: "Right"
+                }, {
+                  value: "left",
+                  label: "Left"
+                }, {
+                  value: "hide",
+                  label: "Hide"
+                }],
+                defaultValue: "top",
+                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6' || data.chart == '7' || data.chart == '8'}
+              },
               TitleSwitch: {
                 type: "boolean",
                 component: "switch",

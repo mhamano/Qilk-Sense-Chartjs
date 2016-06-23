@@ -61,6 +61,7 @@ var visualize = function($element, layout, _this) {
   var result = [];
   result["dim1"] = [];
   result["dim1_elem"] = [];
+  var cumulativeDataset  = [];
 
   // Initialize arrays for dimension values
    for(var i=0; i<uniqDim2.length; i++) {
@@ -73,12 +74,17 @@ var visualize = function($element, layout, _this) {
    }
 
   var i = 0;
+  var wholeSum = 0;
   _.each(dataGroupedBy, function(d) {
       result["dim1"][i] = d[0].dim1;
       result["dim1_elem"][i] = d[0].dim1_elem;
+      var eachSum = 0; //Cumulative Sum
     _.each(d, function(dd){
       result[dd.dim2][i] = dd.mea1;
+      eachSum += dd.mea1;
     })
+    wholeSum += eachSum;
+    cumulativeDataset[i] = wholeSum;
     i++;
   });
 
@@ -110,6 +116,18 @@ var visualize = function($element, layout, _this) {
     datasets.push(subdata);
   }
 
+  // Define dataset for cumulative line
+  // if (layout.cumulative_line) {
+  //   var subdata = [];
+  //   subdata.label = "Cumulative Line";
+  //   subdata.fill = false;
+  //   subdata.type = "line";
+  //   subdata.position = "right";
+  //   subdata.backgroundColor = "rgba(255,0,0,0.5)";
+  //   subdata.data = cumulativeDataset;
+  //   datasets.push(subdata);
+  // }
+
   var barChartData = {
       labels: result["dim1"],
       datasets: datasets
@@ -125,6 +143,8 @@ var visualize = function($element, layout, _this) {
               text: layout.title
           },
           legend: {
+            display: (layout.legend_position == "hide") ? false : true,
+            position: layout.legend_position,
             onClick: function(evt, legendItem) {
               var values = [];
               var dim = 1;

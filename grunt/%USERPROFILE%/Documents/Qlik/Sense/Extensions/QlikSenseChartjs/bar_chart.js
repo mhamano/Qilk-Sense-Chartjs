@@ -46,6 +46,8 @@ var visualize = function($element, layout, _this) {
             text: layout.title
         },
         legend: {
+          display: (layout.legend_position == "hide") ? false : true,
+          position: layout.legend_position,
           onClick: function(evt, legendItem) {
             //do nothing
           }
