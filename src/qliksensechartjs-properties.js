@@ -145,21 +145,21 @@ define([
                 }],
                 defaultValue: false
               },
-              CumulativeLine: {
-                type: "boolean",
-                component: "switch",
-                label: "Show Cumulative Line",
-                ref: "cumulative_line",
-                options: [{
-                  value: true,
-                  label: "ON"
-                }, {
-                  value: false,
-                  label: "OFF"
-                }],
-                defaultValue: false,
-                show: false
-              },
+              // CumulativeLine: {
+              //   type: "boolean",
+              //   component: "switch",
+              //   label: "Show Cumulative Line",
+              //   ref: "cumulative_line",
+              //   options: [{
+              //     value: true,
+              //     label: "ON"
+              //   }, {
+              //     value: false,
+              //     label: "OFF"
+              //   }],
+              //   defaultValue: false,
+              //   show: false
+              // },
               LegendPotision: {
                 type: "string",
                 component: "dropdown",
