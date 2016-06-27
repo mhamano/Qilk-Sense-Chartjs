@@ -32,6 +32,45 @@ var visualize = function($element, layout, _this) {
           ]
   }
 
+  //format the measure values
+  var formatMeasure = function(value) {
+    var qType = layout.qHyperCube.qMeasureInfo[0].qNumFormat.qType; // Format type
+
+    // When Autoformat is selected
+    if(layout.qHyperCube.qMeasureInfo[0].qIsAutoFormat) {
+      return value;
+    }
+
+    // When Number or Money is selected for format
+    if (qType == "F" || qType == "M" ) {
+      var qFmt = layout.qHyperCube.qMeasureInfo[0].qNumFormat.qFmt; // Format string
+      var digits = 0; //number of deciaml digits
+      var prefix = "";
+
+      // Count the number of decimal digits
+      if(qFmt.indexOf(".") > 0 ) {
+        if(qFmt.split(".")[1].length > 0) { digits = qFmt.split(".")[1].length }
+      } else { digits = 0; }
+
+      //If percentage is selected
+      if(qFmt.substr(qFmt.length - 1,1) == "%") {
+        if(digits>0){--digits}
+        return (value * 100).toFixed(digits) + "%"
+      }
+
+      //Add prefix if Money is selected
+      if(qType == "M") {
+        prefix = qFmt.substr(0,1);
+        digits = 0;
+      }
+
+      if(parseInt(value) > 1000){
+        return prefix + value.toFixed(digits).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      } else {
+        return prefix + value.toFixed(digits);
+      }
+    }
+  } // end of formatMeasure
 
   var qMatrix = layout.qHyperCube.qDataPages[0].qMatrix;
   var uniqDim2 = [], uniqDim2ElemNum = [];
@@ -155,11 +194,22 @@ var visualize = function($element, layout, _this) {
               scaleLabel: {
                 display: layout.datalabel_switch,
                 labelString: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle
+              },
+              ticks: {
+                beginAtZero: true,
+                callback: function(value, index, values) {
+                  return formatMeasure(value);
+                }
               }
             }]
           },
           tooltips: {
-              mode: 'label'
+              mode: 'label',
+              callbacks: {
+                  label: function(tooltipItems, data) {
+                      return data.datasets[tooltipItems.datasetIndex].label +': ' + formatMeasure(tooltipItems.yLabel);
+                  }
+              }
           },
           responsive: true,
           events: ["mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend"],

@@ -12,6 +12,46 @@ var visualize = function($element, layout, _this) {
   //var palette = [ "#b0afae", "#7b7a78", "#545352", "#4477aa", "#7db8da", "#b6d7ea", "#46c646", "#f93f17", "#ffcf02", "#276e27", "#ffffff", "#000000" ];
   var palette = [ "176,175,174", "123,122,120", "84,83,82", "68,119,170", "125,184,218", "182,215,234", "70,198,70", "249,63,23", "255,207,2", "39,110,39", "255,255,255", "0,0,0" ];
 
+  //format the measure values
+  var formatMeasure = function(value) {
+    var qType = layout.qHyperCube.qMeasureInfo[0].qNumFormat.qType; // Format type
+
+    // When Autoformat is selected
+    if(layout.qHyperCube.qMeasureInfo[0].qIsAutoFormat) {
+      return value;
+    }
+
+    // When Number or Money is selected for format
+    if (qType == "F" || qType == "M" ) {
+      var qFmt = layout.qHyperCube.qMeasureInfo[0].qNumFormat.qFmt; // Format string
+      var digits = 0; //number of deciaml digits
+      var prefix = "";
+
+      // Count the number of decimal digits
+      if(qFmt.indexOf(".") > 0 ) {
+        if(qFmt.split(".")[1].length > 0) { digits = qFmt.split(".")[1].length }
+      } else { digits = 0; }
+
+      //If percentage is selected
+      if(qFmt.substr(qFmt.length - 1,1) == "%") {
+        if(digits>0){--digits}
+        return (value * 100).toFixed(digits) + "%"
+      }
+
+      //Add prefix if Money is selected
+      if(qType == "M") {
+        prefix = qFmt.substr(0,1);
+        digits = 0;
+      }
+
+      if(parseInt(value) > 1000){
+        return prefix + value.toFixed(digits).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      } else {
+        return prefix + value.toFixed(digits);
+      }
+    }
+  } // end of formatMeasure
+
   var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
   if (layout.cumulative) {
@@ -54,6 +94,22 @@ var visualize = function($element, layout, _this) {
           onClick: function(evt, legendItem) {
             //do nothing
           }
+        },
+        scale: {
+          ticks: {
+            beginAtZero: true,
+            callback: function(value, index, values) {
+              return formatMeasure(value);
+            }
+          }
+        },
+        tooltips: {
+            mode: 'label',
+            callbacks: {
+                label: function(tooltipItems, data) {
+                    return data.datasets[tooltipItems.datasetIndex].label +': ' + formatMeasure(tooltipItems.yLabel);
+                }
+            }
         },
         responsive: true,
         events: ["mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend"],
