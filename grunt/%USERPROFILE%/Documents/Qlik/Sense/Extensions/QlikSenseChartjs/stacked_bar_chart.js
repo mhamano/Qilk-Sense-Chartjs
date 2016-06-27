@@ -163,9 +163,17 @@ var visualize = function($element, layout, _this) {
           scales: {
               xAxes: [{
                   stacked: true,
+                  scaleLabel: {
+                    display: layout.datalabel_switch,
+                    labelString: layout.qHyperCube.qDimensionInfo[0].qFallbackTitle
+                  }
               }],
               yAxes: [{
-                  stacked: true
+                  stacked: true,
+                  scaleLabel: {
+                    display: layout.datalabel_switch,
+                    labelString: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle
+                  }
               }]
           },
           events: ["mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend"],

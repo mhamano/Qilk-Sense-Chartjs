@@ -52,6 +52,20 @@ var visualize = function($element, layout, _this) {
             //do nothing
           }
         },
+        scales: {
+          xAxes: [{
+            scaleLabel: {
+              display: layout.datalabel_switch,
+              labelString: layout.qHyperCube.qDimensionInfo[0].qFallbackTitle
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: layout.datalabel_switch,
+              labelString: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle
+            }
+          }]
+        },
         responsive: true,
         events: ["mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend"],
         onClick: function(evt) {

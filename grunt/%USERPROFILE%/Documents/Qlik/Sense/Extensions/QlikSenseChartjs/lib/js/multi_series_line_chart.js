@@ -142,6 +142,20 @@ var visualize = function($element, layout, _this) {
               }
             }
           },
+          scales: {
+            xAxes: [{
+              scaleLabel: {
+                display: layout.datalabel_switch,
+                labelString: layout.qHyperCube.qDimensionInfo[0].qFallbackTitle
+              }
+            }],
+            yAxes: [{
+              scaleLabel: {
+                display: layout.datalabel_switch,
+                labelString: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle
+              }
+            }]
+          },
           tooltips: {
               mode: 'label'
           },

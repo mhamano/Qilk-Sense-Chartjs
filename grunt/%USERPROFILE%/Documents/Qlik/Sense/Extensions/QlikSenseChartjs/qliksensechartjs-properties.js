@@ -183,6 +183,21 @@ define([
                 }],
                 defaultValue: "top"
               },
+              DataLabelSwitch: {
+                type: "boolean",
+                component: "switch",
+                label: "Show Data Label",
+                ref: "datalabel_switch",
+                options: [{
+                  value: true,
+                  label: "ON"
+                }, {
+                  value: false,
+                  label: "OFF"
+                }],
+                defaultValue: false,
+                show: function(data) { return data.chart == '1' || data.chart == '2' || data.chart == '3' || data.chart == '4'}
+              },
               TitleSwitch: {
                 type: "boolean",
                 component: "switch",
