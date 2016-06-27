@@ -70,7 +70,7 @@ define([
                   label: "OFF"
                 }],
                 defaultValue: false,
-                show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5' || data.chart == '6'}
+                show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5' || data.chart == '6' || data.chart == '9'}
               },
               BackgroundColor: {
                 label:"Background Color",
@@ -93,7 +93,7 @@ define([
                   label: "100 Colors"
                 }],
                 defaultValue: "twelve",
-                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6' || data.chart == '7' || data.chart == '8'}
+                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6' || data.chart == '7' || data.chart == '8' || data.chart == '9'}
               },
               ColorOpacity: {
                   type: "number",
@@ -118,7 +118,7 @@ define([
                   label: "OFF"
                 }],
                 defaultValue: false,
-                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6' }
+                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6'  || data.chart == '9'}
               },
               PointRadiusSize: {
       						type: "number",
@@ -129,7 +129,7 @@ define([
       						max: 20,
       						step: 1,
       						defaultValue: 2,
-                  show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'  || data.chart == '6'}
+                  show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'  || data.chart == '6' || data.chart == '9'}
               },
               CumulativeSwitch: {
                 type: "boolean",
@@ -196,7 +196,7 @@ define([
                   label: "OFF"
                 }],
                 defaultValue: false,
-                show: function(data) { return data.chart == '1' || data.chart == '2' || data.chart == '3' || data.chart == '4'}
+                show: function(data) { return data.chart == '1' || data.chart == '2' || data.chart == '3' || data.chart == '4' || data.chart == '9'}
               },
               TitleSwitch: {
                 type: "boolean",

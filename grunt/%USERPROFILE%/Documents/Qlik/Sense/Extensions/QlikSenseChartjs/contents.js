@@ -32,6 +32,14 @@ var chartjs = [
     measures:1
   },
   {
+    name:"Multi-Series Stacked Line Chart",
+    id:9,
+    src:"multi_series_stacked_line_chart.js",
+    min_dims:2,
+    max_dims:2,
+    measures:1
+  },
+  {
     name:"Radar Chart",
     id:5,
     src:"radar_chart.js",
