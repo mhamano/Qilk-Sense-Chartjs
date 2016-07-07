@@ -37,7 +37,45 @@ define( [
       }
 
       return palette;
-    },
+    }, // end of defineColorPalette
+    formatMeasure: function(value, layout) {
+      var qType = layout.qHyperCube.qMeasureInfo[0].qNumFormat.qType; // Format type
+
+      // When Autoformat is selected
+      if(layout.qHyperCube.qMeasureInfo[0].qIsAutoFormat) {
+        return value;
+      }
+
+      // When Number or Money is selected for format
+      if (qType == "F" || qType == "M" ) {
+        var qFmt = layout.qHyperCube.qMeasureInfo[0].qNumFormat.qFmt; // Format string
+        var digits = 0; //number of deciaml digits
+        var prefix = "";
+
+        // Count the number of decimal digits
+        if(qFmt.indexOf(".") > 0 ) {
+          if(qFmt.split(".")[1].length > 0) { digits = qFmt.split(".")[1].length }
+        } else { digits = 0; }
+
+        //If percentage is selected
+        if(qFmt.substr(qFmt.length - 1,1) == "%") {
+          if(digits>0){--digits}
+          return (value * 100).toFixed(digits) + "%"
+        }
+
+        //Add prefix if Money is selected
+        if(qType == "M") {
+          prefix = qFmt.substr(0,1);
+          digits = 0;
+        }
+
+        if(parseInt(value) > 1000){
+          return prefix + value.toFixed(digits).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        } else {
+          return prefix + value.toFixed(digits);
+        }
+      }
+    } // end of formatMeasure
 
 
 
