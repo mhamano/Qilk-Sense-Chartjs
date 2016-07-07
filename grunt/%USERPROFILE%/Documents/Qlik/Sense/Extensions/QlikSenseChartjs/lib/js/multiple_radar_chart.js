@@ -34,26 +34,26 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   var data_grouped_by_dim1 = _.groupBy(data, 'dim1')
 
   //Create a container for result
-  var result = [];
-  result["dim1"] = [];
-  result["dim1_elem"] = [];
+  var formatted_data_array = [];
+  formatted_data_array["dim1"] = [];
+  formatted_data_array["dim1_elem"] = [];
 
   // Initialize arrays for dimension values
-   result = chartjsUtils.initializeArrayWithZero(_.size(data_grouped_by_dim1), dim2_unique_values, result);
+   formatted_data_array = chartjsUtils.initializeArrayWithZero(_.size(data_grouped_by_dim1), dim2_unique_values, formatted_data_array);
 
   var i = 0;
   _.each(data_grouped_by_dim1, function(d) {
-      result["dim1"][i] = d[0].dim1;
-      result["dim1_elem"][i] = d[0].dim1_elem;
+      formatted_data_array["dim1"][i] = d[0].dim1;
+      formatted_data_array["dim1_elem"][i] = d[0].dim1_elem;
     _.each(d, function(dd){
-      result[dd.dim2][i] = dd.mea1;
+      formatted_data_array[dd.dim2][i] = dd.mea1;
     })
     i++;
   });
 
   // Culculate cumulative sum when cumulative switch is on
   if (layout.cumulative) {
-    result = chartjsUtils.addCumulativeValuesOnTwoDimensions(dim2_unique_values, result);
+    formatted_data_array = chartjsUtils.addCumulativeValuesOnTwoDimensions(dim2_unique_values, formatted_data_array);
   }
 
   // Create datasets for Chart.js rendering
@@ -63,7 +63,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
     subdata.label = dim2_unique_values[i];
     //subdata.label = "test"
     subdata.backgroundColor = "rgba(" + palette[i] + "," + layout.opacity + ")";
-    subdata.data = result[dim2_unique_values[i]];
+    subdata.data = formatted_data_array[dim2_unique_values[i]];
     subdata.fill = layout.background_color_switch;
     subdata.borderColor = "rgba(" + palette[i] + "," + layout.opacity + ")";
     subdata.pointBackgroundColor = "#FFFFFF";
@@ -72,7 +72,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   }
 
   var barChartData = {
-      labels: result["dim1"],
+      labels: formatted_data_array["dim1"],
       datasets: datasets
   };
 
@@ -120,7 +120,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
           onClick: function(evt) {
             var activePoints = this.getElementsAtEvent(evt);
             if(activePoints.length > 0) {
-              chartjsUtils.makeSelectionsOnDataPoints(result["dim1_elem"][activePoints[0]._index], _this);
+              chartjsUtils.makeSelectionsOnDataPoints(formatted_data_array["dim1_elem"][activePoints[0]._index], _this);
             }
           }
       }
