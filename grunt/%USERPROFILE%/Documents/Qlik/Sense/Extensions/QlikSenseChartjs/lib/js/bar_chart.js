@@ -1,16 +1,14 @@
-var visualize = function($element, layout, _this) {
+var visualize = function($element, layout, _this, chartjsUtils) {
   var id  = layout.qInfo.qId + "_chartjs_bar";
   var ext_width = $element.width(), ext_height = $element.height();
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
       width = ext_width - margin.left - margin.right,
       height = ext_height - margin.top - margin.bottom;
 
+  var palette = chartjsUtils.defineColorPalette("twelve");
+
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
-
-  // Qlik Sense default palette colors
-  //var palette = [ "#b0afae", "#7b7a78", "#545352", "#4477aa", "#7db8da", "#b6d7ea", "#46c646", "#f93f17", "#ffcf02", "#276e27", "#ffffff", "#000000" ];
-  var palette = [ "176,175,174", "123,122,120", "84,83,82", "68,119,170", "125,184,218", "182,215,234", "70,198,70", "249,63,23", "255,207,2", "39,110,39", "255,255,255", "0,0,0" ];
 
   //format the measure values
   var formatMeasure = function(value) {

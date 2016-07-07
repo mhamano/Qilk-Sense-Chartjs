@@ -14,11 +14,12 @@ define([
         './qliksensechartjs-properties',
         './qliksensechartjs-initialproperties',
         './lib/js/extensionUtils',
+        './lib/js/chartjsUtils',
         'text!./lib/css/style.css',
         './lib/js/contents',
         './lib/js/Chart'
 ],
-function ($, _, props, initProps, extensionUtils, cssContent, contents, Chart) {
+function ($, _, props, initProps, extensionUtils, chartjsUtils, cssContent, contents, Chart) {
     'use strict';
     extensionUtils.addStyleToHeader(cssContent);
 
@@ -83,7 +84,7 @@ function ($, _, props, initProps, extensionUtils, cssContent, contents, Chart) {
 
     						// Load in the appropriate script and viz
     						jQuery.getScript(url, function() {
-    							visualize($element, layout, self);
+    							visualize($element, layout, self, chartjsUtils);
     							//lastUsedChart = layout.chart;
     						});
     					//} else {
