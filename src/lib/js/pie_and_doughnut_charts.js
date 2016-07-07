@@ -74,18 +74,10 @@ var visualize = function($element, layout, _this, chartjsUtils) {
         responsive: true,
         events: ["mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend"],
         onClick: function(evt) {
-            var activePoints = this.getElementsAtEvent(evt);
-
-            if(activePoints.length > 0) {
-              var values = [];
-              var dim = 0;
-              if(data[activePoints[0]._index][0].qElemNumber<0) {
-                //do nothing
-              } else {
-                values.push(data[activePoints[0]._index][0].qElemNumber);
-                _this.selectValues(dim, values, true)
-              }
-            }
+          var activePoints = this.getElementsAtEvent(evt);
+          if(activePoints.length > 0) {
+            chartjsUtils.makeSelectionsOnDataPoints(data[activePoints[0]._index][0].qElemNumber, _this);
+          }
         }
       }
       // options: {

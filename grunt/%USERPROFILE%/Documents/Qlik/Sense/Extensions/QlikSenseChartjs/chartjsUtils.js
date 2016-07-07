@@ -105,7 +105,16 @@ define( [
       }
       return result;
     }, //addCumulativeValuesOnTwoDimensions
-
+    makeSelectionsOnDataPoints: function(selectedElemNumber, _this) {
+      var values = [];
+      var dim = 0;
+      if(selectedElemNumber < 0) {
+        //do nothing
+      } else {
+        values.push(selectedElemNumber);
+        _this.selectValues(dim, values, true)
+      }
+    }, //end of makeSelectionsOnDataPoints
 
   };
 

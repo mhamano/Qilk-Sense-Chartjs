@@ -147,14 +147,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
           onClick: function(evt) {
               var activePoints = this.getElementsAtEvent(evt);
               if(activePoints.length > 0) {
-                var values = [];
-                var dim = 0;
-                if(result["dim1_elem"][activePoints[0]._index]<0) {
-                  //do nothing
-                } else {
-                  values.push(result["dim1_elem"][activePoints[0]._index]);
-                  _this.selectValues(dim, values, true)
-                }
+                chartjsUtils.makeSelectionsOnDataPoints(result["dim1_elem"][activePoints[0]._index], _this);
               }
           }
       }
