@@ -11,20 +11,11 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   var palette = chartjsUtils.defineColorPalette(layout.color_selection);
 
   var qMatrix = layout.qHyperCube.qDataPages[0].qMatrix;
-  var dim2_unique_values = [], dim2_unique_elem_nums = [];
 
-  var data = qMatrix.map(function(d) {
-    if(dim2_unique_values.indexOf(d[1].qText) < 0){
-      dim2_unique_values.push(d[1].qText);
-      dim2_unique_elem_nums[d[1].qText] = d[1].qElemNumber ;
-    }
-    return({
-      dim1: d[0].qText,
-      dim1_elem: d[0].qElemNumber,
-      dim2: d[1].qText,
-      mea1: d[2].qNum
-    });
-  })
+  var result_set = chartjsUtils.flattenData(qMatrix);
+  var flatten_data = result_set[0];
+  var dim2_unique_values = result_set[1];
+  var dim2_unique_elem_nums = result_set[2];
 
   // Sort by Alphabetic order
   if (layout.sort) {
@@ -32,7 +23,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   }
 
   //Group by dimension1
-  var data_grouped_by_dim1 = _.groupBy(data, 'dim1')
+  var data_grouped_by_dim1 = _.groupBy(flatten_data, 'dim1')
 
   //Create a container for result
   var formatted_data_array = [];
@@ -42,15 +33,8 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   // Initialize arrays for dimension values
    formatted_data_array = chartjsUtils.initializeArrayWithZero(_.size(data_grouped_by_dim1), dim2_unique_values, formatted_data_array);
 
-  var i = 0;
-  _.each(data_grouped_by_dim1, function(d) {
-      formatted_data_array["dim1"][i] = d[0].dim1;
-      formatted_data_array["dim1_elem"][i] = d[0].dim1_elem;
-    _.each(d, function(dd){
-      formatted_data_array[dd.dim2][i] = dd.mea1;
-    })
-    i++;
-  });
+   // Store hypercube data to formatted_data_array
+   formatted_data_array = chartjsUtils.storeHypercubeDataToArray(data_grouped_by_dim1, formatted_data_array);
 
   // Culculate cumulative sum when cumulative switch is on
   if (layout.cumulative) {

@@ -127,7 +127,36 @@ define( [
        }
        return result;
     }, //end of initializeArrayWithZero
-
+    storeHypercubeDataToArray: function(data_grouped_by_dim1, formatted_data_array) {
+      var i = 0;
+      _.each(data_grouped_by_dim1, function(d) {
+          formatted_data_array["dim1"][i] = d[0].dim1;
+          formatted_data_array["dim1_elem"][i] = d[0].dim1_elem;
+        _.each(d, function(dd){
+          formatted_data_array[dd.dim2][i] = dd.mea1;
+        })
+        i++;
+      });
+      return formatted_data_array;
+    }, //end of storeHypercubeDataToArray
+    flattenData: function(qMatrix) {
+      // Store unique values of dim2
+      var dim2_unique_values = [], dim2_unique_elem_nums = [];
+      var data = qMatrix.map(function(d) {
+        if(dim2_unique_values.indexOf(d[1].qText) < 0){
+          dim2_unique_values.push(d[1].qText);
+          dim2_unique_elem_nums[d[1].qText] = d[1].qElemNumber ;
+        }
+        // Return flat hypercube data
+        return({
+          dim1: d[0].qText,
+          dim1_elem: d[0].qElemNumber,
+          dim2: d[1].qText,
+          mea1: d[2].qNum
+        });
+      })
+      return [data, dim2_unique_values, dim2_unique_elem_nums]
+    }, // end of flattenData
   };
 
 } );
