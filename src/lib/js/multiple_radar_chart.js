@@ -71,7 +71,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
     datasets.push(subdata);
   }
 
-  var barChartData = {
+  var chart_data = {
       labels: formatted_data_array["dim1"],
       datasets: datasets
   };
@@ -79,7 +79,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   var ctx = document.getElementById(id);
   var myMultipleRadar = new Chart(ctx, {
       type: 'radar',
-      data: barChartData,
+      data: chart_data,
       options: {
           title:{
               display: layout.title_switch,
