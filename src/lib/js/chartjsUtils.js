@@ -88,17 +88,17 @@ define( [
       }
       return data;
     }, //end of addCumulativeValues
-    addCumulativeValuesOnTwoDimensions: function(uniqDim2, result) {
+    addCumulativeValuesOnTwoDimensions: function(dim2_unique_values, result) {
       var cumSum = 0;
       // Loop for each dimension2
-      for(var i=0; i<uniqDim2.length; i++) {
+      for(var i=0; i<dim2_unique_values.length; i++) {
         // Acumulate values
-        for(var j=0; j<result[uniqDim2[i]].length; j++) {
+        for(var j=0; j<result[dim2_unique_values[i]].length; j++) {
           if ( result["dim1_elem"][j] < 0 ) {
             //ignore dimension with "-" value
           } else {
-            isNaN(result[uniqDim2[i]][j]) ? cumSum += 0 : cumSum += result[uniqDim2[i]][j];
-            result[uniqDim2[i]][j] = cumSum;
+            isNaN(result[dim2_unique_values[i]][j]) ? cumSum += 0 : cumSum += result[dim2_unique_values[i]][j];
+            result[dim2_unique_values[i]][j] = cumSum;
           }
         }
         cumSum = 0;  //reset variable for sum
@@ -115,6 +115,18 @@ define( [
         _this.selectValues(dim, values, true)
       }
     }, //end of makeSelectionsOnDataPoints
+    initializeArrayWithZero: function(dim1_length, dim2_unique_values, result) {
+      // Initialize arrays for dimension values
+       for(var i = 0; i < dim2_unique_values.length; i++) {
+         // zero reset on result array
+         var array_filled_with_zero = [];
+         for(var j = 0; j < dim1_length; j++) {
+           array_filled_with_zero[j] = 0;
+         }
+         result[dim2_unique_values[i]] = array_filled_with_zero;
+       }
+       return result;
+    }, //end of initializeArrayWithZero
 
   };
 

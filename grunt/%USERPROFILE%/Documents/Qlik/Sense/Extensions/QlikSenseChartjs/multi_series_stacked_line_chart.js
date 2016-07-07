@@ -11,12 +11,12 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   var palette = chartjsUtils.defineColorPalette(layout.color_selection);
 
   var qMatrix = layout.qHyperCube.qDataPages[0].qMatrix;
-  var uniqDim2 = [], uniqDim2ElemNum = [];
+  var dim2_unique_values = [], dim2_unique_elem_nums = [];
 
   var data = qMatrix.map(function(d) {
-    if(uniqDim2.indexOf(d[1].qText) < 0){
-      uniqDim2.push(d[1].qText);
-      uniqDim2ElemNum[d[1].qText] = d[1].qElemNumber ;
+    if(dim2_unique_values.indexOf(d[1].qText) < 0){
+      dim2_unique_values.push(d[1].qText);
+      dim2_unique_elem_nums[d[1].qText] = d[1].qElemNumber ;
     }
     return({
       dim1: d[0].qText,
@@ -28,11 +28,11 @@ var visualize = function($element, layout, _this, chartjsUtils) {
 
   // Sort by Alphabetic order
   if (layout.sort) {
-    uniqDim2.sort()
+    dim2_unique_values.sort()
   }
 
   //Group by dimension1
-  var dataGroupedBy = _.groupBy(data, 'dim1')
+  var data_grouped_by_dim1 = _.groupBy(data, 'dim1')
 
   //Create a container for result
   var result = [];
@@ -40,17 +40,10 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   result["dim1_elem"] = [];
 
   // Initialize arrays for dimension values
-   for(var i=0; i<uniqDim2.length; i++) {
-     // zero reset on result array
-     var zeroArray = [];
-     for(var j=0;j<_.size(dataGroupedBy); j++) {
-       zeroArray[j] = 0;
-     }
-     result[uniqDim2[i]] = zeroArray;
-   }
+   result = chartjsUtils.initializeArrayWithZero(_.size(data_grouped_by_dim1), dim2_unique_values, result);
 
   var i = 0;
-  _.each(dataGroupedBy, function(d) {
+  _.each(data_grouped_by_dim1, function(d) {
       result["dim1"][i] = d[0].dim1;
       result["dim1_elem"][i] = d[0].dim1_elem;
     _.each(d, function(dd){
@@ -61,16 +54,16 @@ var visualize = function($element, layout, _this, chartjsUtils) {
 
   // Culculate cumulative sum when cumulative switch is on
   if (layout.cumulative) {
-    result = chartjsUtils.addCumulativeValuesOnTwoDimensions(uniqDim2, result);
+    result = chartjsUtils.addCumulativeValuesOnTwoDimensions(dim2_unique_values, result);
   }
 
   // Create datasets for Chart.js rendering
   var datasets = [];
-  for(var i=0; i<uniqDim2.length; i++ ) {
+  for(var i=0; i<dim2_unique_values.length; i++ ) {
     var subdata = [];
-    subdata.label = uniqDim2[i];
+    subdata.label = dim2_unique_values[i];
     subdata.backgroundColor = "rgba(" + palette[i] + "," + layout.opacity + ")";
-    subdata.data = result[uniqDim2[i]];
+    subdata.data = result[dim2_unique_values[i]];
     subdata.fill = layout.background_color_switch;
     subdata.borderColor = "rgba(" + palette[i] + "," + layout.opacity + ")";
     subdata.pointBackgroundColor = "#FFFFFF";
@@ -98,10 +91,10 @@ var visualize = function($element, layout, _this, chartjsUtils) {
             onClick: function(evt, legendItem) {
               var values = [];
               var dim = 1;
-              if(uniqDim2ElemNum[legendItem.text]<0) {
+              if(dim2_unique_elem_nums[legendItem.text]<0) {
                 //do nothing
               } else {
-                values.push(uniqDim2ElemNum[legendItem.text]);
+                values.push(dim2_unique_elem_nums[legendItem.text]);
                 _this.selectValues(dim, values, true);
               }
             }
