@@ -60,21 +60,8 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   });
 
   // Culculate cumulative sum when cumulative switch is on
-  var cumSum = 0;
   if (layout.cumulative) {
-    // Loop for each dimension2
-    for(var i=0; i<uniqDim2.length; i++) {
-      // Acumulate values
-      for(var j=0; j<result[uniqDim2[i]].length; j++) {
-        if ( result["dim1_elem"][j] < 0 ) {
-          //ignore dimension with "-" value
-        } else {
-          isNaN(result[uniqDim2[i]][j]) ? cumSum += 0 : cumSum += result[uniqDim2[i]][j];
-          result[uniqDim2[i]][j] = cumSum;
-        }
-      }
-      cumSum = 0;  //reset variable for sum
-    }
+    result = chartjsUtils.addCumulativeValuesOnTwoDimensions(uniqDim2, result);
   }
 
   // Create datasets for Chart.js rendering
