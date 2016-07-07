@@ -75,8 +75,19 @@ define( [
           return prefix + value.toFixed(digits);
         }
       }
-    } // end of formatMeasure
-
+    }, // end of formatMeasure
+    addCumulativeValues: function(data) {
+      var cumSum = 0;
+      for(var i=0; i<data.length; i++) {
+        if(data[i][0].qElemNumber < 0) {
+          //ignore dimension with "-" value
+        } else {
+          isNaN(cumSum)? cumSum+=0 : cumSum+=data[i][1].qNum;
+          data[i][1].qNum = cumSum;
+        }
+      }
+      return data;
+    }
 
 
   };

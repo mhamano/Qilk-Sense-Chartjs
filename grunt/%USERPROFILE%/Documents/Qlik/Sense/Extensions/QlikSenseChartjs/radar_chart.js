@@ -13,15 +13,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
   if (layout.cumulative) {
-    var cumSum = 0;
-    for(var i=0; i<data.length; i++) {
-      if(data[i][0].qElemNumber < 0) {
-        //ignore dimension with "-" value
-      } else {
-        isNaN(cumSum)? cumSum+=0 : cumSum+=data[i][1].qNum;
-        data[i][1].qNum = cumSum;
-      }
-    }
+    data = chartjsUtils.addCumulativeValues(data);
   }
 
   var ctx = document.getElementById(id);
