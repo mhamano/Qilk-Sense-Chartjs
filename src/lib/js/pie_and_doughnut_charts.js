@@ -1,9 +1,8 @@
 var visualize = function($element, layout, _this, chartjsUtils) {
   var id  = layout.qInfo.qId + "_chartjs_bar";
-  var ext_width = $element.width(), ext_height = $element.height();
-  var margin = {top: 20, right: 20, bottom: 30, left: 40},
-      width = ext_width - margin.left - margin.right,
-      height = ext_height - margin.top - margin.bottom;
+
+  var width_height = chartjsUtils.calculateMargin($element, layout);
+  var width = width_height[0], height = width_height[1];
 
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');

@@ -1,6 +1,6 @@
 {
     "name": "Grunt-Deployment-QlikSenseChartjs",
-    "version": "0.0.1",
+    "version": "0.0.4",
     "description": "Grunt tasks (dev + release) for the Qlik Sense extension Qlik Sense Chartjs",
     "main": "gruntfile.js",
     "scripts": {

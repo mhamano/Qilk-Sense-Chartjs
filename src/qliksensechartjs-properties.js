@@ -131,6 +131,33 @@ define([
       						defaultValue: 2,
                   show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'  || data.chart == '6' || data.chart == '9'}
               },
+              marginTop: {
+                ref: "properties.marginTop",
+                label: "Margin Top (px)",
+                type: "integer",
+                defaultValue: 20,
+                show: false
+              },
+              marginRight: {
+                ref: "properties.marginRight",
+                label: "Margin Right (px)",
+                type: "integer",
+                defaultValue: 20,
+                show: false
+              },
+              marginBottom: {
+                ref: "properties.marginBottom",
+                label: "Margin Bottom (px)",
+                type: "integer",
+                defaultValue: 30
+              },
+              marginLeft: {
+                ref: "properties.marginLeft",
+                label: "Margin Left (px)",
+                type: "integer",
+                defaultValue: 40,
+                show: false
+              },
               CumulativeSwitch: {
                 type: "boolean",
                 component: "switch",

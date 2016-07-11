@@ -157,6 +157,14 @@ define( [
       })
       return [data, dim2_unique_values, dim2_unique_elem_nums]
     }, // end of flattenData
+    calculateMargin: function($element, layout) {
+      var ext_width = $element.width(), ext_height = $element.height();
+      var margin = {top: layout.properties.marginTop, right: layout.properties.marginRight, bottom: layout.properties.marginBottom, left: layout.properties.marginLeft},
+          width = ext_width - margin.left - margin.right,
+          height = ext_height - margin.top - margin.bottom;
+      return [width, height];
+
+    }// end of calculateMargin
   };
 
 } );
