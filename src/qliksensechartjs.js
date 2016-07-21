@@ -30,7 +30,12 @@ function ($, _, props, initProps, extensionUtils, chartjsUtils, cssContent, cont
     return {
         definition: props,
         initialProperties: initProps,
-        snapshot: { canTakeSnapshot: true },
+        support: {
+		        snapshot: true,
+		        export: true,
+		        exportData: true
+	      },
+        //snapshot: { canTakeSnapshot: true },
         //
         // resize : function($el, layout) {
         //     this.paint($el,layout);
