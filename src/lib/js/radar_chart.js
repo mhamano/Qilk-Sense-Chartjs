@@ -7,7 +7,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
 
-  var palette = chartjsUtils.defineColorPalette("twelve");
+  var palette = chartjsUtils.defineColorPalette("palette");
 
   var data = layout.qHyperCube.qDataPages[0].qMatrix;
 

@@ -4,7 +4,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   var width_height = chartjsUtils.calculateMargin($element, layout);
   var width = width_height[0], height = width_height[1];
 
-  var palette = chartjsUtils.defineColorPalette("twelve");
+  var palette = chartjsUtils.defineColorPalette("palette");
 
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
