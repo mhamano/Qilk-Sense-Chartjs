@@ -44,8 +44,14 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   var datasets = [];
   for(var i=0; i<dim2_unique_values.length; i++ ) {
     var subdata = [];
+    var color_id = i;
+    if (layout.color_selection == "twelve") {
+      color_id = i % 12
+    } else if (layout.color_selection == "one-handred") {
+      color_id = i % 100
+    } else {}
     subdata.label = dim2_unique_values[i];
-    subdata.backgroundColor = "rgba(" + palette[i] + "," + layout.opacity + ")";
+    subdata.backgroundColor = "rgba(" + palette[color_id] + "," + layout.opacity + ")";
     subdata.data = formatted_data_array[dim2_unique_values[i]];
     datasets.push(subdata);
   }

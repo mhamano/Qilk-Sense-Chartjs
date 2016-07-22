@@ -9,11 +9,16 @@ var visualize = function($element, layout, _this, chartjsUtils) {
 
   var palette = chartjsUtils.defineColorPalette(layout.color_selection);
 
-  var palette_r = palette.map(function(d) {
-    return "rgba(" + d + "," + layout.opacity + ")";
-  });
-
   var data = layout.qHyperCube.qDataPages[0].qMatrix;
+
+  var color_count = 12;
+  if(layout.color_selection == "one-handred") {
+    color_count = 100;
+  }
+  var palette_r = data.map(function(d, index) {
+    return "rgba(" + palette[index%color_count] + "," + layout.opacity + ")";
+  })
+
 
   if (layout.cumulative) {
     data = chartjsUtils.addCumulativeValues(data);
