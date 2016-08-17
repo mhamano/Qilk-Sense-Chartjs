@@ -41,17 +41,17 @@ define( [
 
       return palette;
     }, // end of defineColorPalette
-    formatMeasure: function(value, layout) {
-      var qType = layout.qHyperCube.qMeasureInfo[0].qNumFormat.qType; // Format type
+    formatMeasure: function(value, layout, meas_num = 0) {
+      var qType = layout.qHyperCube.qMeasureInfo[meas_num].qNumFormat.qType; // Format type
 
       // When Autoformat is selected
-      if(layout.qHyperCube.qMeasureInfo[0].qIsAutoFormat) {
+      if(layout.qHyperCube.qMeasureInfo[meas_num].qIsAutoFormat) {
         return value;
       }
 
       // When Number or Money is selected for format
       if (qType == "F" || qType == "M" ) {
-        var qFmt = layout.qHyperCube.qMeasureInfo[0].qNumFormat.qFmt; // Format string
+        var qFmt = layout.qHyperCube.qMeasureInfo[meas_num].qNumFormat.qFmt; // Format string
         var digits = 0; //number of deciaml digits
         var prefix = "";
 

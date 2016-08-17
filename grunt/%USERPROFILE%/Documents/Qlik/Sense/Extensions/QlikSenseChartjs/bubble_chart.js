@@ -93,13 +93,13 @@ function drawBubble($element, layout, fullMatrix) {
             callbacks: {
               label: function(tooltipItems, data) {
                 var tooltipMessage = data.datasets[0].data[tooltipItems.index].label + ': '
-                  + chartjsUtils.formatMeasure(data.datasets[0].data[tooltipItems.index].x, layout) + ', '
-                  + chartjsUtils.formatMeasure(data.datasets[0].data[tooltipItems.index].y, layout);
+                  + chartjsUtils.formatMeasure(data.datasets[0].data[tooltipItems.index].x, layout, 0) + ', '
+                  + chartjsUtils.formatMeasure(data.datasets[0].data[tooltipItems.index].y, layout, 1);
 
                 if (num_of_measures == 2) {
                   return tooltipMessage;
                 } else {
-                  return tooltipMessage + ', ' + chartjsUtils.formatMeasure(data.datasets[0].data[tooltipItems.index].z, layout);
+                  return tooltipMessage + ', ' + chartjsUtils.formatMeasure(data.datasets[0].data[tooltipItems.index].z, layout, 2);
                 }
               }
             }
