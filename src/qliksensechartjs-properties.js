@@ -55,7 +55,7 @@ define([
                 ref: "color",
                 type: "integer",
                 defaultValue: 3,
-                show: function(data) { return data.chart == '1' || data.chart == '3' || data.chart == '5'}
+                show: function(data) { return data.chart == '1' || data.chart == '3' || data.chart == '5'  || data.chart == '10'}
               },
               BackgroundColorSwitch: {
                 label: "Fill Background Color",
@@ -181,7 +181,8 @@ define([
                   value: false,
                   label: "OFF"
                 }],
-                defaultValue: false
+                defaultValue: false,
+                show: function(data) { return data.chart != '10'}
               },
               // CumulativeLine: {
               //   type: "boolean",
