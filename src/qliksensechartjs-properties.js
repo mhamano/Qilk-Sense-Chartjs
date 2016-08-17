@@ -105,6 +105,17 @@ define([
                   step: 0.1,
                   defaultValue: 0.8
               },
+              BubbleSize: {
+                  type: "number",
+                  component: "slider",
+                  label: "Bubble Size",
+                  ref: "bubble_size",
+                  min: 1,
+                  max: 50,
+                  step: 1,
+                  defaultValue: 2,
+                  show: function(data) { return data.chart == '10'}
+              },
               SortByAlphabet: {
                 label:"Sort by Alphabetic Order on 2nd Dim",
                 component: "switch",
@@ -223,7 +234,7 @@ define([
                   label: "OFF"
                 }],
                 defaultValue: false,
-                show: function(data) { return data.chart == '1' || data.chart == '2' || data.chart == '3' || data.chart == '4' || data.chart == '9'}
+                show: function(data) { return data.chart == '1' || data.chart == '2' || data.chart == '3' || data.chart == '4' || data.chart == '9'  || data.chart == '10'}
               },
               TitleSwitch: {
                 type: "boolean",

@@ -71,6 +71,14 @@ var chartjs = [
      max_dims:1,
      measures:1
     },
+    {
+      name:"Bubble Chart",
+      id:10,
+      src:"bubble_chart.js",
+      min_dims:1,
+      max_dims:1,
+      measures:2
+    },
 ];
 
 var chart_options = chartjs.map(function(d) {
