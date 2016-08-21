@@ -3,7 +3,6 @@ var visualize = function($element, layout, _this, chartjsUtils) {
 
 
 function drawBubble($element, layout, fullMatrix) {
-  console.log(layout)
   var id  = layout.qInfo.qId + "_chartjs_bubble";
 
   var width_height = chartjsUtils.calculateMargin($element, layout);
@@ -20,17 +19,16 @@ function drawBubble($element, layout, fullMatrix) {
 
   var level_interval = "";
   var bubble_size = layout.bubble_size;
+  var data_length = data.length;
 
   if (num_of_measures == 3) {
     // Defines the number of levels for the bubble size of measure #3
-    var num_of_levels = 30;
+    var num_of_levels = data_length > 30 ? 30 : data_length ;
 
     var min_of_mea3 = layout.qHyperCube.qMeasureInfo[2].qMin;
     var max_of_mea3 = layout.qHyperCube.qMeasureInfo[2].qMax;
-    level_interval = (max_of_mea3 - min_of_mea3) / num_of_levels;
+    level_interval = (max_of_mea3 - min_of_mea3) >  0 ? (max_of_mea3 - min_of_mea3) / num_of_levels : max_of_mea3 / num_of_levels;
   }
-
-  console.log(level_interval)
 
   if (layout.cumulative) {
     data = chartjsUtils.addCumulativeValues(data);
