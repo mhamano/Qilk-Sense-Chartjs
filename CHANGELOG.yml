@@ -1,0 +1,13 @@
+# Change Log
+
+v0.0.1:
+  date: "2016-06-20"
+  new:
+    - Initial Commit
+  enhancements:
+
+v0.1.0:
+  date: "2016-07-19"
+  new:
+    - Migrated to sense-ext
+  enhancements:

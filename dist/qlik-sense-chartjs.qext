@@ -1,0 +1,9 @@
+{
+	"name" : "Qlik-Sense-Chartjs",
+	"description" : "Qlik Sense Extension using Chart.js(http://www.chartjs.org/).",
+	"icon" : "extension",
+	"type" : "visualization",
+	"version": "0.1.0",
+	"preview" : "./lib/images/chartjs.png",
+	"author": "Masaki Hamano"
+}

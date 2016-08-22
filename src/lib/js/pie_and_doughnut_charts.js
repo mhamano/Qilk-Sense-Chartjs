@@ -62,7 +62,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
           ticks: {
             beginAtZero: true,
             callback: function(value, index, values) {
-              return chartjsUtils.formatMeasure(value, layout);
+              return chartjsUtils.formatMeasure(value, layout, 0);
             }
           }
         },
@@ -70,7 +70,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
             mode: 'label',
             callbacks: {
                 label: function(tooltipItems, data) {
-                    return data.labels[tooltipItems.index] +': ' + chartjsUtils.formatMeasure(data.datasets[0].data[tooltipItems.index], layout);
+                    return data.labels[tooltipItems.index] +': ' + chartjsUtils.formatMeasure(data.datasets[0].data[tooltipItems.index], layout, 0);
                 }
             }
         },

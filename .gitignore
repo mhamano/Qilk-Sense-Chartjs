@@ -1,12 +1,18 @@
-.idea/
-Resources/
-Tests/
+# =========================
+# Project specific
+# =========================
+[Rr]esources/
+[Tt]ests/
 web.*.config
-dist/
-node_modules/
-grunt/node_modules/
+/dist_dev/
+/**/node_modules/
+/**/bower_components/
+/build/*_dev.zip
 
 
+# =========================
+# Visual Studio
+# =========================
 #https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
@@ -17,9 +23,8 @@ grunt/node_modules/
 # Build results
 
 [Dd]ebug/
-[Rr]elease/
+#[Rr]elease/
 x64/
-# build/
 [Bb]in/
 [Oo]bj/
 
@@ -85,6 +90,11 @@ UpgradeLog*.htm
 # SQL Server files
 App_Data/*.mdf
 App_Data/*.ldf
+
+# =========================
+# Webstorm
+# =========================
+.idea/
 
 # =========================
 # Windows detritus

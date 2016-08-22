@@ -41,7 +41,7 @@ define( [
 
       return palette;
     }, // end of defineColorPalette
-    formatMeasure: function(value, layout, meas_num = 0) {
+    formatMeasure: function(value, layout, meas_num ) {
       var qType = layout.qHyperCube.qMeasureInfo[meas_num].qNumFormat.qType; // Format type
 
       // When Autoformat is selected

@@ -1,4 +1,4 @@
-# Qlik Sense Chart.js
+# Qlik-Sense-Chartjs
 
 ## Purpose and Description
 Qlik Sense Extension using Chart.js(http://www.chartjs.org/).
@@ -11,16 +11,23 @@ Qlik Sense Extension using Chart.js(http://www.chartjs.org/).
 ![Alt text](./src/lib/images/extension_sample2.png)
 
 ## Installation
-Qlik Sense Desktop Unzip the downloaded zip file into "C:\Users\%USERNAME%\Documents\Qlik\Sense\Extensions\" folder.
 
-Qlik Sense Server Please refer to the following instruction for importing an extension:
+1. Download the latest version from [here](./build/release).
+2. Qlik Sense Desktop
+	* To install, copy all files in the .zip file to folder "C:\Users\[%Username%]\Documents\Qlik\Sense\Extensions\Qlik-Sense-Chartjs"
+3. Qlik Sense Server
+	* See instructions [how to import an extension on Qlik Sense Server](http://help.qlik.com/sense/en-us/developer/#../Subsystems/Workbench/Content/BuildingExtensions/HowTos/deploy-extensions.htm)
 
-[Import Extension]( http://help.qlik.com/sense/en-US/online/#../Subsystems/ManagementConsole/Content/QMC_Resources_Extensions_AddingExtensions.htm?Highlight=add extension "Import Extension")
+## Author
+
+**Masaki Hamano**
+* http://github.com/mhamano
 
 ## Change Log
 
-See [CHANGELOG.md](ChangeLog.md)
+See [CHANGELOG](CHANGELOG.yml)
 
 ## License & Copyright
+The software is made available "AS IS" without any warranty of any kind under the MIT License (MIT).
 
-See [LICENSE.md](License.md)
+See [Additional license information for this solution.](LICENSE.md)

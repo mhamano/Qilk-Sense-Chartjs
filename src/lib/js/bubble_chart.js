@@ -71,6 +71,12 @@ function drawBubble($element, layout, fullMatrix) {
             scaleLabel: {
               display: layout.datalabel_switch,
               labelString: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle
+            },
+            ticks: {
+              beginAtZero: true,
+              callback: function(value, index, values) {
+                return chartjsUtils.formatMeasure(value, layout, 0);
+              }
             }
           }],
           yAxes: [{
@@ -81,7 +87,7 @@ function drawBubble($element, layout, fullMatrix) {
             ticks: {
               beginAtZero: true,
               callback: function(value, index, values) {
-                return chartjsUtils.formatMeasure(value, layout);
+                return chartjsUtils.formatMeasure(value, layout, 1);
               }
             }
           }]
