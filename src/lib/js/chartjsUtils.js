@@ -42,11 +42,19 @@ define( [
       return palette;
     }, // end of defineColorPalette
     formatMeasure: function(value, layout, meas_num ) {
+      var decimal_separator = layout.decimal_separator;
+      var thousand_separator = layout.thousand_separator;
+
       var qType = layout.qHyperCube.qMeasureInfo[meas_num].qNumFormat.qType; // Format type
 
       // When Autoformat is selected
       if(layout.qHyperCube.qMeasureInfo[meas_num].qIsAutoFormat) {
-        return value;
+        //return value;
+        if(parseInt(value) > 999){
+          return value.toString().replace(".", decimal_separator).replace(/\B(?=(\d{3})+(?!\d))/g, thousand_separator);
+        } else {
+          return value.toString().replace(".", decimal_separator);
+        }
       }
 
       // When Number or Money is selected for format
@@ -72,10 +80,10 @@ define( [
           digits = 0;
         }
 
-        if(parseInt(value) > 1000){
-          return prefix + value.toFixed(digits).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if(parseInt(value) > 999){
+          return prefix + value.toFixed(digits).toString().replace(".", decimal_separator).replace(/\B(?=(\d{3})+(?!\d))/g, thousand_separator);
         } else {
-          return prefix + value.toFixed(digits);
+          return prefix + value.toFixed(digits).toString().replace(".", decimal_separator);
         }
       }
     }, // end of formatMeasure

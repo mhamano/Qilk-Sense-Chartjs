@@ -250,7 +250,38 @@ define([
                   label: "OFF"
                 }],
                 defaultValue: false
-              }
+              },
+              DecimalSeparator: {
+                type: "string",
+                component: "dropdown",
+                label: "Decimal Separator",
+                ref: "decimal_separator",
+                options: [{
+                  value: ".",
+                  label: "."
+                }, {
+                  value: ",",
+                  label: ","
+                }],
+                defaultValue: "."
+              },
+              ThousandSeparator: {
+                type: "string",
+                component: "dropdown",
+                label: "Thousand Separator",
+                ref: "thousand_separator",
+                options: [{
+                  value: ",",
+                  label: ","
+                }, {
+                  value: ".",
+                  label: "."
+                }, {
+                  value: " ",
+                  label: "Space"
+                }],
+                defaultValue: ","
+              },
           }
         }
       }

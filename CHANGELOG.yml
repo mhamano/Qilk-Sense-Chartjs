@@ -11,3 +11,9 @@ v0.1.0:
   new:
     - Migrated to sense-ext
   enhancements:
+
+v0.1.1:
+  date: "2016-07-19"
+  new:
+  enhancements:
+    - Added a function to select decimal and thousand separator for measure values
