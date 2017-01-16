@@ -17,3 +17,9 @@ v0.1.1:
   new:
   enhancements:
     - Added a function to select decimal and thousand separator for measure values
+
+v0.1.2:
+  date: "2017-01-16"
+  new:
+  enhancements:
+    - Added a function to select custom colors

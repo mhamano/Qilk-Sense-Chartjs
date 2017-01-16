@@ -7,7 +7,12 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
 
-  var palette = chartjsUtils.defineColorPalette(layout.color_selection);
+  var palette = [];
+  if (layout.colors == "auto") {
+    palette = chartjsUtils.defineColorPalette(layout.color_selection);
+  } else {
+    palette = layout.custom_colors.split("-");
+  }
 
   var qMatrix = layout.qHyperCube.qDataPages[0].qMatrix;
 
@@ -44,10 +49,12 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   for(var i=0; i<dim2_unique_values.length; i++ ) {
     var subdata = [];
     var color_id = i;
-    if (layout.color_selection == "twelve") {
+    if (layout.colors == "auto" && layout.color_selection == "twelve") {
       color_id = i % 12
-    } else if (layout.color_selection == "one-handred") {
+    } else if (layout.colors == "auto" && layout.color_selection == "one-handred") {
       color_id = i % 100
+    } else if (layout.colors == "custom") {
+      color_id = i % palette.length
     } else {}
     subdata.label = dim2_unique_values[i];
     //subdata.label = "test"

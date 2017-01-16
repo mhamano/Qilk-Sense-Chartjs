@@ -7,7 +7,28 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
 
-  var palette = chartjsUtils.defineColorPalette("palette");
+  var palette = [];
+  var layout_color = 0;
+  if (layout.colors == "auto") {
+    palette = chartjsUtils.defineColorPalette("palette");
+    layout_color = layout.color;
+  } else {
+    palette = layout.custom_colors.split("-");
+  }
+  var color = "rgba(" + palette[layout_color] + "," + layout.opacity + ")"
+
+  var background_color = "";
+  var background_custom_palette = [];
+  if (layout.colors == "auto" && layout.background_color_switch) {
+    background_color = "rgba(" + palette[layout.background_color] + "," + layout.opacity + ")";
+  } else if (layout.colors == "auto") {
+    background_color = "rgba(" + palette[layout.color] + "," + layout.opacity + ")";
+  } else if (layout.colors == "custom" && layout.background_color_switch) {
+    background_custom_palette = layout.custom_background_color.split("-");
+    background_color = "rgba(" + background_custom_palette[0] + "," + layout.opacity + ")";
+  } else if (layout.colors == "custom") {
+    background_color = "rgba(" + palette[layout_color] + "," + layout.opacity + ")";
+  } else {}
 
   var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
@@ -25,9 +46,9 @@ var visualize = function($element, layout, _this, chartjsUtils) {
               label: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle,
               fill: layout.background_color_switch,
               data: data.map(function(d) { return d[1].qNum; }),
-              backgroundColor: (layout.background_color_switch) ?  "rgba(" + palette[layout.background_color] + "," + layout.opacity + ")" : "rgba(" + palette[layout.color] + "," + layout.opacity + ")",
-              borderColor: "rgba(" + palette[layout.color] + "," + layout.opacity + ")",
-              pointBackgroundColor: "rgba(" + palette[layout.color] + "," + layout.opacity + ")",
+              backgroundColor: background_color,
+              borderColor: color,
+              pointBackgroundColor: color,
               pointRadius: layout.point_radius_size,
               borderWidth: 1
           }]

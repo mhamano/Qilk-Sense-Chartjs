@@ -8,7 +8,15 @@ function drawBubble($element, layout, fullMatrix) {
   var width_height = chartjsUtils.calculateMargin($element, layout);
   var width = width_height[0], height = width_height[1];
 
-  var palette = chartjsUtils.defineColorPalette("palette");
+  var palette = [];
+  var layout_color = 0;
+  if (layout.colors == "auto") {
+    palette = chartjsUtils.defineColorPalette("palette");
+    layout_color = layout.color;
+  } else {
+    palette = layout.custom_colors.split("-");
+  }
+  var color = "rgba(" + palette[layout_color] + "," + layout.opacity + ")"
 
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
@@ -49,8 +57,8 @@ function drawBubble($element, layout, fullMatrix) {
                   return { label: d[0].qText, x: d[1].qNum, y: d[2].qNum, z: d[3].qNum, r: Math.floor( ( d[3].qNum / level_interval / num_of_levels ) * bubble_size )  }
                 }
               }),
-              backgroundColor: "rgba(" + palette[layout.color] + "," + layout.opacity + ")",
-              borderColor: "rgba(" + palette[layout.color] + "," + layout.opacity + ")",
+              backgroundColor: color,
+              borderColor: color,
               borderWidth: 1
           }]
       },

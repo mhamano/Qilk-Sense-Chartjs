@@ -7,14 +7,22 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
 
-  var palette = chartjsUtils.defineColorPalette(layout.color_selection);
+  var palette = [];
+  if (layout.colors == "auto") {
+    palette = chartjsUtils.defineColorPalette(layout.color_selection);
+  } else {
+    palette = layout.custom_colors.split("-");
+  }
 
   var data = layout.qHyperCube.qDataPages[0].qMatrix;
 
   var color_count = 12;
-  if(layout.color_selection == "one-handred") {
+  if(layout.colors == "auto" && layout.color_selection == "one-handred") {
     color_count = 100;
+  } else if (layout.colors == "custom") {
+    color_count = palette.length;
   }
+
   var palette_r = data.map(function(d, index) {
     return "rgba(" + palette[index%color_count] + "," + layout.opacity + ")";
   })

@@ -49,13 +49,49 @@ define([
                 defaultValue: "pie",
                 show: function(data) { return data.chart == '8'}
               },
+              Colors: {
+                label: "Colors",
+                component: "switch",
+                ref: "colors",
+                type: "string",
+                options: [{
+                  value: "auto",
+                  label: "Auto"
+                }, {
+                  value: "custom",
+                  label: "Custom"
+                }],
+                defaultValue: "auto"
+              },
+              ColorSelection: {
+                type: "string",
+                component: "dropdown",
+                label: "Color Selection",
+                ref: "color_selection",
+                options: [{
+                  value: "twelve",
+                  label: "12 Colors"
+                }, {
+                  value: "one-handred",
+                  label: "100 Colors"
+                }],
+                defaultValue: "twelve",
+                show: function(data) { return data.colors == 'auto' && (data.chart == '2' || data.chart == '4'  || data.chart == '6' || data.chart == '7' || data.chart == '8' || data.chart == '9') }
+              },
               ColorPicker: {
                 label:"Color",
                 component: "color-picker",
                 ref: "color",
                 type: "integer",
                 defaultValue: 3,
-                show: function(data) { return data.chart == '1' || data.chart == '3' || data.chart == '5'  || data.chart == '10'}
+                show: function(data) { return data.colors == 'auto' && (data.chart == '1' || data.chart == '3' || data.chart == '5'  || data.chart == '10') }
+              },
+              CustomColors: {
+                ref: "custom_colors",
+                label: "Custom Colors",
+                type: "string",
+                defaultValue: "51,34,136 - 102,153,204 - 136,204,238 - 68,170,153 - 17,119,51 - 153,153,51 - 221,204,119 - 102,17,0 - 204,102,119 - 170,68,102 - 136,34,85 - 170,68,153",
+                show: function(data) { return data.colors == 'custom'}
               },
               BackgroundColorSwitch: {
                 label: "Fill Background Color",
@@ -78,22 +114,14 @@ define([
                 ref: "background_color",
                 type: "integer",
                 defaultValue: 3,
-                show: function(data) { return ( data.background_color_switch == true && data.chart == '3' ) || ( data.background_color_switch == true && data.chart == '5' )}
+                show: function(data) { return ( data.colors == 'auto' && data.background_color_switch == true && ( data.chart == '3' || data.chart == '5' ))}
               },
-              ColorSelection: {
+              CustomBackgroundColor: {
+                ref: "custom_background_color",
+                label: "Custom Background Color",
                 type: "string",
-                component: "dropdown",
-                label: "Color Selection",
-                ref: "color_selection",
-                options: [{
-                  value: "twelve",
-                  label: "12 Colors"
-                }, {
-                  value: "one-handred",
-                  label: "100 Colors"
-                }],
-                defaultValue: "twelve",
-                show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6' || data.chart == '7' || data.chart == '8' || data.chart == '9'}
+                defaultValue: "51,34,136 - 102,153,204 - 136,204,238 - 68,170,153 - 17,119,51 - 153,153,51 - 221,204,119 - 102,17,0 - 204,102,119 - 170,68,102 - 136,34,85 - 170,68,153",
+                show: function(data) { return ( data.colors == 'custom' && data.background_color_switch == true && ( data.chart == '3' || data.chart == '5' ))}
               },
               ColorOpacity: {
                   type: "number",
