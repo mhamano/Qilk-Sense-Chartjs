@@ -35,12 +35,30 @@ gulp.task('js:root', function() {
   gulp.src('./src/*.js')
   .pipe(plumber())
   //.pipe(concat( extension_name + '.js'))
+  //.pipe(uglify())
+  .pipe(gulp.dest('./dist'))
+  .pipe(gulp.dest(config.extension_dir));
+});
+
+gulp.task('js:root:uglify', function() {
+  gulp.src('./src/*.js')
+  .pipe(plumber())
+  //.pipe(concat( extension_name + '.js'))
   .pipe(uglify())
   .pipe(gulp.dest('./dist'))
   .pipe(gulp.dest(config.extension_dir));
 });
 
 gulp.task('js:lib', function() {
+  gulp.src('./src/lib/js/*.js')
+  .pipe(plumber())
+  //.pipe(concat( extension_name + '.js'))
+  //.pipe(uglify())
+  .pipe(gulp.dest('./dist/lib/js/'))
+  .pipe(gulp.dest(config.extension_dir + 'lib/js/'));
+});
+
+gulp.task('js:lib:uglify', function() {
   gulp.src('./src/lib/js/*.js')
   .pipe(plumber())
   //.pipe(concat( extension_name + '.js'))
@@ -100,19 +118,29 @@ gulp.task('zip:release', function() {
   .pipe(gulp.dest('./build/release/'))
 });
 
-gulp.task('build', ['zip:dev'], function() {
-  console.log("Build task completed.");
-});
-
-gulp.task('release', ['zip:release'], function() {
-  console.log("Release task completed.");
+gulp.task('build',  ['js:root:uglify', 'js:lib:uglify', 'qext', 'less', 'html', 'images:root', 'images:lib'], function() {
+  console.log("Default task completed.");
 });
 
 gulp.task('default',  ['js:root', 'js:lib', 'qext', 'less', 'html', 'images:root', 'images:lib'], function() {
   console.log("Default task completed.");
 });
 
+gulp.task('release', ['zip:dev','zip:release'], function() {
+  console.log("Release task completed.");
+});
+
 gulp.task('watch', function() {
+  gulp.watch('./src/*.js', ['js:root']);
+  gulp.watch('./src/lib/js/*.js', ['js:lib']);
+  gulp.watch('./src/lib/less/*.less', ['less']);
+  gulp.watch('./src/*.html', ['html']);
+  gulp.watch('./src/*.+(jpg|jpeg|png|gif|svg)', ['images:root']);
+  gulp.watch('./src/lib/images/*.+(jpg|jpeg|png|gif|svg)', ['images:lib']);
+  gulp.watch('./src/*.qext', ['qext']);
+});
+
+gulp.task('watch:uglify', function() {
   gulp.watch('./src/*.js', ['js:root']);
   gulp.watch('./src/lib/js/*.js', ['js:lib']);
   gulp.watch('./src/lib/less/*.less', ['less']);

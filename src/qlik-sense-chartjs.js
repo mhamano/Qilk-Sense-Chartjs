@@ -14,12 +14,12 @@ define([
         './properties',
         './initialproperties',
         './lib/js/extensionUtils',
-        './lib/js/chartjsUtils',
         'text!./lib/css/style.css',
         './lib/js/contents',
-        './lib/js/Chart'
+        './lib/js/Chart',
+        './lib/js/chartjsUtils'
 ],
-function ($, _, props, initProps, extensionUtils, chartjsUtils, cssContent, contents, Chart) {
+function ($, _, props, initProps, extensionUtils, cssContent, contents, Chart) {
     'use strict';
     extensionUtils.addStyleToHeader(cssContent);
 

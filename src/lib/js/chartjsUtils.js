@@ -1,11 +1,7 @@
 /*global define*/
-define( [
-  'jquery',
-  'underscore'
-], function ($,_) {
-'use strict';
 
-  return {
+
+  var chartjsUtils =  {
 
     defineColorPalette: function(palette_type) {
       var palette = [];
@@ -176,7 +172,14 @@ define( [
       return [width, height];
 
     }, // end of calculateMargin
-    // pageExtensionData is based on https://github.com/skokenes/senseUtils
+    // flattenPages and pageExtensionData are based on https://github.com/skokenes/senseUtils
+    flattenPages : function(data) {// function to flatten out the paginated qHyperCube data into one large qMatrix
+        var flat = [];
+        $.each(data, function() {
+            flat.extend(this.qMatrix);
+        });
+        return flat;
+    },
     pageExtensionData : function(me, $el, layout, callback) {//(this, extension DOM element, layout object from Sense, your callback)
 
        var lastrow = 0
@@ -201,14 +204,24 @@ define( [
            }];
            me.backendApi.getData(requestPage).then(function(dataPages) {
                //when we get the result run the function again
-               pageExtensionData(me, $el, layout, callback);
+               chartjsUtils.pageExtensionData(me, $el, layout, callback);
            });
        } else {//if we are at the last row...
            //fire off the callback function
-           callback($el, layout, layout.qHyperCube.qDataPages[0].qMatrix, me);
-           //(DOM element, layout object, new flattened matrix, this)
+           var bigMatrix = [];
+          //use flattenPages function to create large master qMatrix
+          bigMatrix = chartjsUtils.flattenPages(layout.qHyperCube.qDataPages);
+          callback($el, layout, bigMatrix, me);
+          //(DOM element, layout object, new flattened matrix, this)
        }
      } // end of pageExtensionData
   };
 
-} );
+  Object.defineProperty(Array.prototype, 'extend', {
+    enumerable: false,
+    value:function(arr) {
+        arr.forEach(function(v) {
+            this.push(v);
+        },this);
+    }
+});

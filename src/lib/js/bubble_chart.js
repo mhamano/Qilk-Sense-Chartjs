@@ -1,7 +1,6 @@
 var visualize = function($element, layout, _this, chartjsUtils) {
   chartjsUtils.pageExtensionData(_this, $element, layout, drawBubble);
 
-
 function drawBubble($element, layout, fullMatrix) {
   var id  = layout.qInfo.qId + "_chartjs_bubble";
 
@@ -22,7 +21,9 @@ function drawBubble($element, layout, fullMatrix) {
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
 
   //var data = layout.qHyperCube.qDataPages[0].qMatrix;
+
   var data = fullMatrix;
+
   var num_of_measures = layout.qHyperCube.qMeasureInfo.length;
 
   var level_interval = "";
@@ -137,4 +138,4 @@ function drawBubble($element, layout, fullMatrix) {
   });
 }
 
-} //追加
+}
