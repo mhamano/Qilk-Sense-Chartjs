@@ -36,9 +36,9 @@
 These external libraries are used within this solution. Many thanks to the authors!
 
 **Library 1**
-* Name:
-* License:
-* Url:
+* Name: Chart.js
+* License: MIT License (MIT)
+* Url: http://www.chartjs.org/
 * Author:
 
 **Library 2**

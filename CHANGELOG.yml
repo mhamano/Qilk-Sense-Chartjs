@@ -23,3 +23,11 @@ v0.1.2:
   new:
   enhancements:
     - Added a function to select custom colors
+
+v0.1.3:
+  date: "2017-03-07"
+  new:
+  enhancements:
+    - Upgraded Chart.js Library 2.1.6 => 2.5.0 #9
+    - Fixed to show thousand separators for negative values #10
+    - Fixed the format of negative values for currency

@@ -46,7 +46,7 @@
       // When Autoformat is selected
       if(layout.qHyperCube.qMeasureInfo[meas_num].qIsAutoFormat) {
         //return value;
-        if(parseInt(value) > 999){
+        if(parseInt(value) > 999 || parseInt(value) < -999){
           return value.toString().replace(".", decimal_separator).replace(/\B(?=(\d{3})+(?!\d))/g, thousand_separator);
         } else {
           return value.toString().replace(".", decimal_separator);
@@ -67,7 +67,7 @@
         //If percentage is selected
         if(qFmt.substr(qFmt.length - 1,1) == "%") {
           if(digits>0){--digits}
-          return (value * 100).toFixed(digits) + "%"
+          return (value * 100).toFixed(digits).toString().replace(".", decimal_separator).replace(/\B(?=(\d{3})+(?!\d))/g, thousand_separator) + "%"
         }
 
         //Add prefix if Money is selected
@@ -78,6 +78,8 @@
 
         if(parseInt(value) > 999){
           return prefix + value.toFixed(digits).toString().replace(".", decimal_separator).replace(/\B(?=(\d{3})+(?!\d))/g, thousand_separator);
+        } else if (parseInt(value) < -999) {
+          return '-' + prefix + value.toFixed(digits).toString().slice(1).replace(".", decimal_separator).replace(/\B(?=(\d{3})+(?!\d))/g, thousand_separator);
         } else {
           return prefix + value.toFixed(digits).toString().replace(".", decimal_separator);
         }
