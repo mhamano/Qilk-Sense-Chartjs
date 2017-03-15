@@ -293,6 +293,21 @@ define([
                 }],
                 defaultValue: true
               },
+              XScaleMode: {
+                type: "string",
+                component: "dropdown",
+                label: "XScaleMode",
+                ref: "xscale_mode",
+                options: [{
+                  value: "category",
+                  label: "Category"
+                }, {
+                  value: "linear",
+                  label: "Linear"
+                }],
+                defaultValue: "linear",
+                show: function(data) { return data.chart == '10' }
+              },
               DecimalSeparator: {
                 type: "string",
                 component: "dropdown",

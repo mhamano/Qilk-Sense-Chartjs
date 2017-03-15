@@ -109,7 +109,7 @@ if (num_of_measures >= 4) {
         },
         scales: {
           xAxes: [{
-            type: "linear",
+            type: layout.xscale_mode,
             position: "bottom",
             scaleLabel: {
               display: layout.datalabel_switch,
