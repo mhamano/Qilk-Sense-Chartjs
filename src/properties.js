@@ -160,15 +160,15 @@ define([
                 show: function(data) { return data.chart == '2' || data.chart == '4'  || data.chart == '6'  || data.chart == '9'}
               },
               PointRadiusSize: {
-      						type: "number",
-      						component: "slider",
-      						label: "Point Raduis Size",
-      						ref: "point_radius_size",
-      						min: 1,
-      						max: 20,
-      						step: 1,
-      						defaultValue: 2,
-                  show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'  || data.chart == '6' || data.chart == '9'}
+                type: "number",
+                component: "slider",
+                label: "Point Raduis Size",
+                ref: "point_radius_size",
+                min: 1,
+                max: 20,
+                step: 1,
+                defaultValue: 2,
+                show: function(data) { return data.chart == '3' || data.chart == '4' || data.chart == '5'  || data.chart == '6' || data.chart == '9'}
               },
               marginTop: {
                 ref: "properties.marginTop",
@@ -309,6 +309,14 @@ define([
                   label: "Space"
                 }],
                 defaultValue: ","
+              },
+              LineColorPicker: {
+                label:"Line Color",
+                component: "color-picker",
+                ref: "line_color",
+                type: "integer",
+                defaultValue: 7,
+                show: function(data) { return data.colors == 'auto' && (data.chart == '1' || data.chart == '3' || data.chart == '5'  || data.chart == '10') }
               },
           }
         }

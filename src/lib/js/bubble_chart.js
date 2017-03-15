@@ -15,7 +15,11 @@ function drawBubble($element, layout, fullMatrix) {
   } else {
     palette = layout.custom_colors.split("-");
   }
+  // Color for bubbles
   var color = "rgba(" + palette[layout_color] + "," + layout.opacity + ")"
+
+  // Color for line charts
+  var line_color = "rgb(" + chartjsUtils.defineColorPalette("palette")[layout.line_color] + ")";
 
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
@@ -30,7 +34,7 @@ function drawBubble($element, layout, fullMatrix) {
   var bubble_size = layout.bubble_size;
   var data_length = data.length;
 
-  if (num_of_measures == 3) {
+  if (num_of_measures >= 3) {
     // Defines the number of levels for the bubble size of measure #3
     var num_of_levels = data_length > 30 ? 30 : data_length ;
 
@@ -39,29 +43,57 @@ function drawBubble($element, layout, fullMatrix) {
     level_interval = (max_of_mea3 - min_of_mea3) >  0 ? (max_of_mea3 - min_of_mea3) / num_of_levels : max_of_mea3 / num_of_levels;
   }
 
+  // Calculate cumulative values
   if (layout.cumulative) {
     data = chartjsUtils.addCumulativeValues(data);
+  };
+
+  // Create datasets
+  var datasets = [{
+      type: 'bubble',
+      label: layout.qHyperCube.qDimensionInfo[0].qFallbackTitle,
+      data: data.map(function(d) {
+        if (num_of_measures == 2 ){
+          return { label: d[0].qText, x: d[1].qNum, y: d[2].qNum, r: bubble_size }
+        } else {
+          return { label: d[0].qText, x: d[1].qNum, y: d[2].qNum, z: d[3].qNum, r: Math.floor( ( d[3].qNum / level_interval / num_of_levels ) * bubble_size )  }
+        }
+      }),
+      backgroundColor: color,
+      borderColor: color,
+      borderWidth: 1
   }
+];
+
+// Add lines when more than 3 measures are defined
+// 1st measure: x-axis, 2nd measure: y-axis, 3rd< measure: lines
+if (num_of_measures >= 4) {
+  for ( var i=4; i<=num_of_measures;i++) {
+    datasets.push({
+        type: 'line',
+        label: layout.qHyperCube.qDimensionInfo[0].qFallbackTitle,
+        data: data.map(function(d) {
+            return { label: d[0].qText, x: d[1].qNum, y: d[i].qNum }
+        }),
+        backgroundColor: 'rgba(0,0,0,0)',
+        borderColor: line_color,
+        pointBackgroundColor: 'rgba(0,0,0,0)',
+        borderWidth: 2,
+        pointRadius: 0
+    })
+  }
+};
 
   var ctx = document.getElementById(id);
 
   var myChart = new Chart(ctx, {
-      type: 'bubble',
+
       data: {
+          labels: data.map(function(d){
+            return d[1].qNum;
+          }),
           //labels: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle,
-          datasets: [{
-              label: layout.qHyperCube.qDimensionInfo[0].qFallbackTitle,
-              data: data.map(function(d) {
-                if (num_of_measures == 2 ){
-                  return { label: d[0].qText, x: d[1].qNum, y: d[2].qNum, r: bubble_size }
-                } else {
-                  return { label: d[0].qText, x: d[1].qNum, y: d[2].qNum, z: d[3].qNum, r: Math.floor( ( d[3].qNum / level_interval / num_of_levels ) * bubble_size )  }
-                }
-              }),
-              backgroundColor: color,
-              borderColor: color,
-              borderWidth: 1
-          }]
+          datasets: datasets
       },
       options: {
         title:{
@@ -77,12 +109,15 @@ function drawBubble($element, layout, fullMatrix) {
         },
         scales: {
           xAxes: [{
+            type: "linear",
+            position: "bottom",
             scaleLabel: {
               display: layout.datalabel_switch,
               labelString: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle
             },
             ticks: {
               beginAtZero: true,
+              //stepSize:1,
               callback: function(value, index, values) {
                 return chartjsUtils.formatMeasure(value, layout, 0);
               }
