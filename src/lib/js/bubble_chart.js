@@ -68,7 +68,6 @@ function drawBubble($element, layout, fullMatrix) {
 // Add lines when more than 3 measures are defined
 // 1st measure: x-axis, 2nd measure: y-axis, 3rd< measure: lines
 if (num_of_measures >= 4) {
-  console.log(layout.qHyperCube)
   for ( var i=4; i<=num_of_measures;i++) {
     datasets.push({
         type: 'line',
@@ -83,7 +82,7 @@ if (num_of_measures >= 4) {
         pointRadius: 0
     })
   }
-};
+}
 
   var ctx = document.getElementById(id);
 
@@ -117,7 +116,7 @@ if (num_of_measures >= 4) {
               labelString: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle
             },
             ticks: {
-              beginAtZero: true,
+              beginAtZero: layout.begin_at_zero_switch,
               //stepSize:1,
               callback: function(value, index, values) {
                 return chartjsUtils.formatMeasure(value, layout, 0);
@@ -130,7 +129,7 @@ if (num_of_measures >= 4) {
               labelString: layout.qHyperCube.qMeasureInfo[1].qFallbackTitle
             },
             ticks: {
-              beginAtZero: true,
+              beginAtZero: layout.begin_at_zero_switch,
               callback: function(value, index, values) {
                 return chartjsUtils.formatMeasure(value, layout, 1);
               }
