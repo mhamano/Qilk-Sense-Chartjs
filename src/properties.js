@@ -318,6 +318,16 @@ define([
                 defaultValue: 7,
                 show: function(data) { return data.colors == 'auto' && (data.chart == '1' || data.chart == '3' || data.chart == '5'  || data.chart == '10') }
               },
+              LineWidth: {
+                  type: "number",
+                  component: "slider",
+                  label: "Line Width",
+                  ref: "line_width",
+                  min: 0,
+                  max: 10,
+                  step: 1,
+                  defaultValue: 2
+              },
           }
         }
       }

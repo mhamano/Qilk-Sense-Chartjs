@@ -19,7 +19,7 @@ function drawBubble($element, layout, fullMatrix) {
   var color = "rgba(" + palette[layout_color] + "," + layout.opacity + ")"
 
   // Color for line charts
-  var line_color = "rgb(" + chartjsUtils.defineColorPalette("palette")[layout.line_color] + ")";
+  var line_color = "rgba(" + chartjsUtils.defineColorPalette("palette")[layout.line_color] + ",1.0)";
 
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
@@ -68,17 +68,18 @@ function drawBubble($element, layout, fullMatrix) {
 // Add lines when more than 3 measures are defined
 // 1st measure: x-axis, 2nd measure: y-axis, 3rd< measure: lines
 if (num_of_measures >= 4) {
+  console.log(layout.qHyperCube)
   for ( var i=4; i<=num_of_measures;i++) {
     datasets.push({
         type: 'line',
-        label: layout.qHyperCube.qDimensionInfo[0].qFallbackTitle,
+        label: layout.qHyperCube.qMeasureInfo[i-1].qFallbackTitle,
         data: data.map(function(d) {
             return { label: d[0].qText, x: d[1].qNum, y: d[i].qNum }
         }),
         backgroundColor: 'rgba(0,0,0,0)',
         borderColor: line_color,
         pointBackgroundColor: 'rgba(0,0,0,0)',
-        borderWidth: 2,
+        borderWidth: layout.line_width,
         pointRadius: 0
     })
   }
