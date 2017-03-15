@@ -306,7 +306,7 @@ define([
                   label: "Linear"
                 }],
                 defaultValue: "linear",
-                show: function(data) { return data.chart == '10' }
+                show: function(data) { return data.chart == '3' || data.chart == '10' }
               },
               DecimalSeparator: {
                 type: "string",

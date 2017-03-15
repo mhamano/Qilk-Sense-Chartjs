@@ -41,13 +41,13 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   var ctx = document.getElementById(id);
 
   var myLineChart = new Chart(ctx, {
-      type: 'line',
       data: {
           labels: data.map(function(d) { return d[0].qText; }),
           datasets: [{
+              type: 'line',
               label: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle,
               fill: layout.background_color_switch,
-              data: data.map(function(d) { return d[1].qNum; }),
+              data: data.map(function(d) { return { label: d[0].qText, x: d[0].qNum, y: d[1].qNum } }),
               backgroundColor: background_color,
               borderColor: color,
               pointBackgroundColor: color,
@@ -69,6 +69,8 @@ var visualize = function($element, layout, _this, chartjsUtils) {
         },
         scales: {
           xAxes: [{
+            type: layout.xscale_mode,
+            position: "bottom",
             scaleLabel: {
               display: layout.datalabel_switch,
               labelString: layout.qHyperCube.qDimensionInfo[0].qFallbackTitle
