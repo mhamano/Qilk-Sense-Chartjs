@@ -68,7 +68,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
         },
         scale: {
           ticks: {
-            beginAtZero: true,
+            beginAtZero: layout.begin_at_zero_switch,
             callback: function(value, index, values) {
               return chartjsUtils.formatMeasure(value, layout, 0);
             }

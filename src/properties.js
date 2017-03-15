@@ -279,6 +279,20 @@ define([
                 }],
                 defaultValue: false
               },
+              beginAtZero: {
+                type: "boolean",
+                component: "switch",
+                label: "Begin At Zero",
+                ref: "begin_at_zero_switch",
+                options: [{
+                  value: true,
+                  label: "ON"
+                }, {
+                  value: false,
+                  label: "OFF"
+                }],
+                defaultValue: true
+              },
               DecimalSeparator: {
                 type: "string",
                 component: "dropdown",
