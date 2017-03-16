@@ -399,9 +399,19 @@ define([
                 }, {
                   value: "one-handred",
                   label: "100 Colors"
+                }, {
+                  value: "custom",
+                  label: "Custom Colors"
                 }],
                 defaultValue: "twelve",
                 show: function(data) { return data.line_color_switch == 'custom' && data.line_color_selection == 'measure' && (data.chart == '3' || data.chart == '10') }
+              },
+              LineCustomColor: {
+                ref: "line_custom_color",
+                label: "Custom Colors",
+                type: "string",
+                defaultValue: "51,34,136 - 102,153,204 - 136,204,238 - 68,170,153 - 17,119,51 - 153,153,51 - 221,204,119 - 102,17,0 - 204,102,119 - 170,68,102 - 136,34,85 - 170,68,153",
+                show: function(data) { return data.line_color_switch == 'custom' && data.line_color_selection == 'measure' && data.line_color_selection_for_measure == 'custom' && (data.chart == '3' || data.chart == '10') }
               }
           }
         }

@@ -18,20 +18,26 @@ function drawBubble($element, layout, fullMatrix) {
   // Color for bubbles
   var color = "rgba(" + palette[layout_color] + "," + layout.opacity + ")"
 
-  var line_color = [];
   // Color for line charts
-if (layout.line_color_switch == "auto") {
-  // When color selection is auto
-  line_color[0] = "rgba(" + chartjsUtils.defineColorPalette("palette")[layout.line_color] + ",1.0)";
-} else {
-  // When color selection is custom and single
-  if (layout.line_color_selection == "single") {
-      line_color[0] = "rgba(" + chartjsUtils.defineColorPalette("palette")[layout.line_color_picker] + ",1.0)";
+  var line_color = [];
+
+  if (layout.line_color_switch == "auto") {
+    // When color selection is auto
+    line_color[0] = "rgba(" + chartjsUtils.defineColorPalette("palette")[7] + ",1.0)";
   } else {
-      // When color selection is custom and by measure. 12 colors or 100 colors can be selected.
-      line_color = chartjsUtils.defineColorPalette(layout.line_color_selection_for_measure);
+    // When color selection is custom and single
+    if (layout.line_color_selection == "single") {
+        line_color[0] = "rgba(" + chartjsUtils.defineColorPalette("palette")[layout.line_color_picker] + ",1.0)";
+    } else {
+      if ( layout.line_color_selection_for_measure == 'custom') {
+        // Custom colors
+        line_color = layout.line_custom_color.split("-");
+      } else {
+        // 12 colors or 100 colors
+        line_color = chartjsUtils.defineColorPalette(layout.line_color_selection_for_measure);
+      }
+    }
   }
-}
 
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
