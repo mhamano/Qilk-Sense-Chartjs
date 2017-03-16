@@ -97,6 +97,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
           },
           scales: {
             xAxes: [{
+              type: layout.xscale_mode,
               scaleLabel: {
                 display: layout.datalabel_switch,
                 labelString: layout.qHyperCube.qDimensionInfo[0].qFallbackTitle
