@@ -339,14 +339,6 @@ define([
                 }],
                 defaultValue: ","
               },
-              LineColorPicker: {
-                label:"Line Color",
-                component: "color-picker",
-                ref: "line_color",
-                type: "integer",
-                defaultValue: 7,
-                show: function(data) { return data.colors == 'auto' && (data.chart == '1' || data.chart == '3' || data.chart == '5'  || data.chart == '10') }
-              },
               LineWidth: {
                   type: "number",
                   component: "slider",
@@ -355,8 +347,62 @@ define([
                   min: 0,
                   max: 10,
                   step: 1,
-                  defaultValue: 2
+                  defaultValue: 2,
+                  show: function(data) { return (data.chart == '3' || data.chart == '10') }
               },
+              LineColors: {
+                label: "Line Colors",
+                component: "switch",
+                ref: "line_color_switch",
+                type: "string",
+                options: [{
+                  value: "auto",
+                  label: "Auto"
+                }, {
+                  value: "custom",
+                  label: "Custom"
+                }],
+                defaultValue: "auto",
+                show: function(data) { return (data.chart == '3' || data.chart == '10') }
+              },
+              LineColorSelection: {
+                type: "string",
+                component: "dropdown",
+                //label: "Color Selection",
+                ref: "line_color_selection",
+                options: [{
+                  value: "single",
+                  label: "Single Color"
+                }, {
+                  value: "measure",
+                  label: "By Measure"
+                }],
+                defaultValue: "single",
+                show: function(data) { return data.line_color_switch == 'custom' && (data.chart == '3' || data.chart == '10') }
+              },
+              LineColorPicker: {
+                label:"Line Color",
+                component: "color-picker",
+                ref: "line_color_picker",
+                type: "integer",
+                defaultValue: 7,
+                show: function(data) { return data.line_color_switch == 'custom' && data.line_color_selection == 'single' && (data.chart == '3' || data.chart == '10') }
+              },
+              LineColorSelectionForMeasure: {
+                type: "string",
+                component: "dropdown",
+                label: "Color Selection",
+                ref: "line_color_selection_for_measure",
+                options: [{
+                  value: "twelve",
+                  label: "12 Colors"
+                }, {
+                  value: "one-handred",
+                  label: "100 Colors"
+                }],
+                defaultValue: "twelve",
+                show: function(data) { return data.line_color_switch == 'custom' && data.line_color_selection == 'measure' && (data.chart == '3' || data.chart == '10') }
+              }
           }
         }
       }

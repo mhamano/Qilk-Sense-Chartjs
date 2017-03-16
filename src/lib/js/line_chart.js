@@ -7,6 +7,9 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
 
+  // Get the number of measures
+  var num_of_measures = layout.qHyperCube.qMeasureInfo.length;
+
   var palette = [];
   var layout_color = 0;
   if (layout.colors == "auto") {
@@ -15,7 +18,12 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   } else {
     palette = layout.custom_colors.split("-");
   }
-  var color = "rgba(" + palette[layout_color] + "," + layout.opacity + ")"
+
+  // Color for main line
+  var color = "rgba(" + palette[layout_color] + "," + layout.opacity + ")";
+
+  // Color for sub-lines
+  var line_color = "rgba(" + chartjsUtils.defineColorPalette("palette")[layout.line_color] + ",1.0)";
 
   var background_color = "";
   var background_custom_palette = [];
@@ -38,22 +46,44 @@ var visualize = function($element, layout, _this, chartjsUtils) {
     data = chartjsUtils.addCumulativeValues(data);
   }
 
+  // Create datasets
+  var datasets = [{
+      type: 'line',
+      label: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle,
+      fill: layout.background_color_switch,
+      data: data.map(function(d) { return { label: d[0].qText, x: d[0].qNum, y: d[1].qNum } }),
+      backgroundColor: background_color,
+      borderColor: color,
+      pointBackgroundColor: color,
+      borderWidth: 1,
+      pointRadius: layout.point_radius_size
+  }];
+
+  // Where there more than 1 measures,
+  if (num_of_measures >= 2) {
+    for ( var i=2; i<=num_of_measures;i++) {
+      datasets.push({
+          type: 'line',
+          label: layout.qHyperCube.qMeasureInfo[i-1].qFallbackTitle,
+          data: data.map(function(d) {
+              return { label: d[0].qText, x: d[0].qNum, y: d[i].qNum }
+          }),
+          backgroundColor: 'rgba(0,0,0,0)',
+          borderColor: line_color,
+          pointBackgroundColor: 'rgba(0,0,0,0)',
+          borderWidth: layout.line_width,
+          pointRadius: 0
+      })
+    }
+  }
+
+
   var ctx = document.getElementById(id);
 
   var myLineChart = new Chart(ctx, {
       data: {
           labels: data.map(function(d) { return d[0].qText; }),
-          datasets: [{
-              type: 'line',
-              label: layout.qHyperCube.qMeasureInfo[0].qFallbackTitle,
-              fill: layout.background_color_switch,
-              data: data.map(function(d) { return { label: d[0].qText, x: d[0].qNum, y: d[1].qNum } }),
-              backgroundColor: background_color,
-              borderColor: color,
-              pointBackgroundColor: color,
-              borderWidth: 1,
-              pointRadius: layout.point_radius_size
-          }]
+          datasets: datasets
       },
       options: {
         title:{

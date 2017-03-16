@@ -18,8 +18,20 @@ function drawBubble($element, layout, fullMatrix) {
   // Color for bubbles
   var color = "rgba(" + palette[layout_color] + "," + layout.opacity + ")"
 
+  var line_color = [];
   // Color for line charts
-  var line_color = "rgba(" + chartjsUtils.defineColorPalette("palette")[layout.line_color] + ",1.0)";
+if (layout.line_color_switch == "auto") {
+  // When color selection is auto
+  line_color[0] = "rgba(" + chartjsUtils.defineColorPalette("palette")[layout.line_color] + ",1.0)";
+} else {
+  // When color selection is custom and single
+  if (layout.line_color_selection == "single") {
+      line_color[0] = "rgba(" + chartjsUtils.defineColorPalette("palette")[layout.line_color_picker] + ",1.0)";
+  } else {
+      // When color selection is custom and by measure. 12 colors or 100 colors can be selected.
+      line_color = chartjsUtils.defineColorPalette(layout.line_color_selection_for_measure);
+  }
+}
 
   //$element.empty();
   $element.html('<canvas id="' + id + '" width="' + width + '" height="'+ height + '"></canvas>');
@@ -69,6 +81,15 @@ function drawBubble($element, layout, fullMatrix) {
 // 1st measure: x-axis, 2nd measure: y-axis, 3rd< measure: lines
 if (num_of_measures >= 4) {
   for ( var i=4; i<=num_of_measures;i++) {
+
+    // Applying color to line
+    var borderColor = [];
+    if ( layout.line_color_switch == "auto" || layout.line_color_selection == "single" ) {
+      borderColor = line_color;
+    } else {
+      borderColor[0] = "rgba(" + line_color[i-4] + ",1)";
+    }
+
     datasets.push({
         type: 'line',
         label: layout.qHyperCube.qMeasureInfo[i-1].qFallbackTitle,
@@ -76,7 +97,7 @@ if (num_of_measures >= 4) {
             return { label: d[0].qText, x: d[1].qNum, y: d[i].qNum }
         }),
         backgroundColor: 'rgba(0,0,0,0)',
-        borderColor: line_color,
+        borderColor: borderColor,
         pointBackgroundColor: 'rgba(0,0,0,0)',
         borderWidth: layout.line_width,
         pointRadius: 0
