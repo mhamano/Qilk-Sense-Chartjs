@@ -89,11 +89,11 @@ if (num_of_measures >= 4) {
   for ( var i=4; i<=num_of_measures;i++) {
 
     // Applying color to line
-    var borderColor = [];
+    var borderColor = '';
     if ( layout.line_color_switch == "auto" || layout.line_color_selection == "single" ) {
-      borderColor = line_color;
+      borderColor = line_color[0];
     } else {
-      borderColor[0] = "rgba(" + line_color[i-4] + ",1)";
+      borderColor = "rgba(" + line_color[i-4] + ",1)";
     }
 
     datasets.push({
@@ -136,7 +136,7 @@ if (num_of_measures >= 4) {
         },
         scales: {
           xAxes: [{
-            type: layout.xscale_mode,
+            type: layout.xscale_mode_bubble,
             position: "bottom",
             scaleLabel: {
               display: layout.datalabel_switch,

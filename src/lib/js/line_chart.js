@@ -23,7 +23,25 @@ var visualize = function($element, layout, _this, chartjsUtils) {
   var color = "rgba(" + palette[layout_color] + "," + layout.opacity + ")";
 
   // Color for sub-lines
-  var line_color = "rgba(" + chartjsUtils.defineColorPalette("palette")[layout.line_color] + ",1.0)";
+  var line_color = [];
+
+  if (layout.line_color_switch == "auto") {
+    // When color selection is auto
+    line_color[0] = "rgba(" + chartjsUtils.defineColorPalette("palette")[7] + ",1.0)";
+  } else {
+    // When color selection is custom and single
+    if (layout.line_color_selection == "single") {
+        line_color[0] = "rgba(" + chartjsUtils.defineColorPalette("palette")[layout.line_color_picker] + ",1.0)";
+    } else {
+      if ( layout.line_color_selection_for_measure == 'custom') {
+        // Custom colors
+        line_color = layout.line_custom_color.split("-");
+      } else {
+        // 12 colors or 100 colors
+        line_color = chartjsUtils.defineColorPalette(layout.line_color_selection_for_measure);
+      }
+    }
+  }
 
   var background_color = "";
   var background_custom_palette = [];
@@ -61,7 +79,16 @@ var visualize = function($element, layout, _this, chartjsUtils) {
 
   // Where there more than 1 measures,
   if (num_of_measures >= 2) {
+
     for ( var i=2; i<=num_of_measures;i++) {
+      // Applying color to line
+      var borderColor = '';
+      if ( layout.line_color_switch == "auto" || layout.line_color_selection == "single" ) {
+        borderColor = line_color[0];
+      } else {
+        borderColor = "rgba(" + line_color[i-2] + ",1)";
+      }
+
       datasets.push({
           type: 'line',
           label: layout.qHyperCube.qMeasureInfo[i-1].qFallbackTitle,
@@ -69,7 +96,7 @@ var visualize = function($element, layout, _this, chartjsUtils) {
               return { label: d[0].qText, x: d[0].qNum, y: d[i].qNum }
           }),
           backgroundColor: 'rgba(0,0,0,0)',
-          borderColor: line_color,
+          borderColor: borderColor,
           pointBackgroundColor: 'rgba(0,0,0,0)',
           borderWidth: layout.line_width,
           pointRadius: 0

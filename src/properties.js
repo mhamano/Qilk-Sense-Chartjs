@@ -293,11 +293,11 @@ define([
                 }],
                 defaultValue: true
               },
-              XScaleMode: {
+              XScaleModeForBubble: {
                 type: "string",
                 component: "dropdown",
-                label: "XScaleMode",
-                ref: "xscale_mode",
+                label: "XScale Mode",
+                ref: "xscale_mode_bubble",
                 options: [{
                   value: "category",
                   label: "Category"
@@ -306,7 +306,22 @@ define([
                   label: "Linear"
                 }],
                 defaultValue: "linear",
-                show: function(data) { return data.chart == '3' || data.chart == '10' }
+                show: function(data) { return data.chart == '10' }
+              },
+              XScaleMode: {
+                type: "string",
+                component: "dropdown",
+                label: "XScale Mode",
+                ref: "xscale_mode",
+                options: [{
+                  value: "category",
+                  label: "Category"
+                }, {
+                  value: "linear",
+                  label: "Linear"
+                }],
+                defaultValue: "category",
+                show: function(data) { return data.chart == '3' }
               },
               DecimalSeparator: {
                 type: "string",
