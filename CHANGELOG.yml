@@ -31,3 +31,12 @@ v0.1.3:
     - Upgraded Chart.js Library 2.1.6 => 2.5.0 #9
     - Fixed to show thousand separators for negative values #10
     - Fixed the format of negative values for currency
+
+v0.2.0:
+  date: "2017-03-16"
+  new:
+    - Lines can be added for bubble chart by adding 4th - 6th measures (More than 6 measures cannot be added because of the limitation of the intialproperties' DataPage setting )
+    - Sub-lines can be added for line chart by adding 2rd - 6th measures. (The same limitation applies as bubble chart.)
+    - Begin At Zero property setting are added. This can control if the charts should always display 0 point or not.
+    - X-axis scale mode is added to bubble chart and line chart. Category or linear can be selected for x-axis.
+  enhancements:

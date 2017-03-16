@@ -2,7 +2,7 @@
 define( [], function () {
     'use strict';
     return {
-			version: 1.0,
+			version: 2.0,
 			qHyperCubeDef: {
 				qDimensions: [],
 				qMeasures: [],
