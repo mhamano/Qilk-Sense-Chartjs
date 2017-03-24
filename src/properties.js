@@ -19,6 +19,15 @@ define([
         uses: "sorting"
     };
 
+    var addons = {
+        uses: "addons",
+          items: {
+            dataHandling: {
+              uses: "dataHandling"
+            }
+        }
+    };
+
     var settings = {
         uses: "settings",
         items: {
@@ -441,7 +450,7 @@ define([
             dimensions: dimensions,
             measures: measures,
             sorting: sorting,
-            //addons: addons,
+            addons: addons,
             settings: settings
 
         }
