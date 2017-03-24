@@ -40,3 +40,9 @@ v0.2.0:
     - Begin At Zero property setting are added. This can control if the charts should always display 0 point or not.
     - X-axis scale mode is added to bubble chart and line chart. Category or linear can be selected for x-axis.
   enhancements:
+
+v0.2.1:
+  date: "2017-03-16"
+  new:
+  enhancements:
+    - Added Add-ons tab to the property
